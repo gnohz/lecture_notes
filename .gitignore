@@ -1,0 +1,14 @@
+.DS_Store
+*.aux
+*.log
+*.out
+*.synctex.gz
+*.tex.project.vim
+*_aux
+*.swp
+*.toc
+*.fdb_latexmk
+*.fls
+*.dvi
+*.bak
+*.pdf

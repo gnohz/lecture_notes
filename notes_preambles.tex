@@ -1,0 +1,94 @@
+\documentclass[]{article}
+\usepackage{etex}
+\usepackage[margin = 1.5in]{geometry}
+\setlength{\parindent}{0in}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{pgfplots}
+\usepackage[lined]{algorithm2e}
+\usepackage{qtree}
+\usepackage{xytree}
+\usepackage{float}
+\usepackage[T1]{fontenc}
+\usepackage{ae,aecompl}
+\usepackage[pdftex, pdfproducer={LaTeX}, pdfcreator={pdflatex}]{hyperref}
+
+\usepackage{cleveref}
+
+% \newtheorem*{theorem}{Theorem}
+% \theoremstyle{definition}
+% \newtheorem*{definition}{Definition}
+% \newtheorem{problem}{Problem}[section]
+% \newtheorem{example}{Example}[section]
+
+% \newtheorem*{lemma}[theorem]{Lemma}
+% \newtheorem*{assumption}[theorem]{Assumption}
+% \newtheorem*{proposition}[theorem]{Proposition}
+% \newtheorem*{corollary}[theorem]{Corollary}
+% \newtheorem*{remark}[theorem]{Remark}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{proposition}{Proposition}
+\newtheorem{remark}{Remark}
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+
+\numberwithin{equation}{section}
+\numberwithin{theorem}{section}
+
+
+\setlength{\marginparwidth}{1.5in}
+\setlength{\algomargin}{0.75em}
+
+\DeclarePairedDelimiter{\set}{\lbrace}{\rbrace}
+
+\definecolor{darkish-blue}{RGB}{25,103,185}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=darkish-blue,
+    filecolor=darkish-blue,
+    linkcolor=darkish-blue,
+    urlcolor=darkish-blue
+}
+\newcommand{\lecture}[1]{\marginpar{{\footnotesize $\leftarrow$ \underline{#1}}}}
+
+
+\newcommand{\cV}{\mathcal{V}}
+\newcommand{\cU}{\mathcal{U}}
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cM}{\mathcal{M}}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\cE}{\mathcal{E}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\cJ}{\mathcal{J}}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\cS}{\mathcal{S}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\bH}{\mathbb{H}}
+\newcommand{\bL}{\mathbb{L}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\bP}{\mathbb{P}} % \P is used by the system
+
+\newcommand{\wt}{\widetilde}
+\newcommand{\ds}{\displaystyle}
+\newcommand{\Ito}{It\^{o}}
+\newcommand{\e}{\varepsilon}
+\newcommand{\ol}{\overline}
+
+\makeatletter
+\def\blfootnote{\gdef\@thefnmark{}\@footnotetext}
+\makeatother
