@@ -22,11 +22,12 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Introduction and Sets} \lecture{January 18, 2017}
+\section{Introduction and sets} \lecture{January 18, 2017}
   \subsection{Course structure}
   \label{subsec:course}
   \begin{itemize}
   \item Instructor information.
+  \item Course website: \href{https://web.math.rochester.edu/courses/current/201/}{https://web.math.rochester.edu/courses/current/201/}
   \item Textbook: on Blackboard.
   \item Grade: $10\%$ Webwork, $10\%$ Written Homework, $20\%$ First Midterm,
     $20\%$ Second Midterm, $40\%$ Final.
@@ -54,7 +55,7 @@
   When studying for exams, start by doing the practice exams and redoing the
   written homework and Webwork. But don't stop there. Redo the problems again
   until the process of solving them becomes automatic. This is how you'll know
-  that you’ve mastered the material. To use your time efficiently, focus your
+  that you've mastered the material. To use your time efficiently, focus your
   practice on the things you haven't mastered.
   
   You are expected to read the textbook and review your class notes while doing homework and studying for exams.
@@ -98,7 +99,7 @@
 
   There is another way to describe a set:
   \[
-    \{x \mid x~ \text{satisfies}~ P\} = \text{set of all elements havign property}
+    \{x \mid x~ \text{satisfies}~ P\} = \text{set of all elements having property}~
     P.
   \]
 
@@ -107,7 +108,7 @@
       [0,1] = \{x \in\R\mid 0 \le x \le 1\};
     \]
     \[
-      A = \{n\in \N\mid n~ \text{is a square}\} = \{n^2\mid n\in \N\} = \{1 ,4,
+      A = \{n\in \N\mid n~ \text{is a square of a positive integer}\} = \{n^2\mid n\in \N\} = \{1 ,4,
       9, 16, 25, \cdots\}.
     \]
   \end{example}
@@ -117,13 +118,14 @@
     write $A \subseteq B$.
   \end{definition}
 
+  {\color{red} insert a venn's graph here!} 
+
   \begin{remark}
     $A = B$ if and only if $A\subseteq B$ and $B\subseteq A$, if and only if $A$
     and $B$ have the same elements.
+
+    The order in the set does not matter. $\{1,2,3\} = \{2, 3, 1\}$.
   \end{remark}
-
-  {\color{red} insert a venn's graph here!} 
-
   \begin{example}
     $A = \{1, 2, 3\}$, $B= \{1, 2, 3, 4, 5, 6\}$, and $C = \{7\}$. Then we have
     \[
@@ -143,7 +145,31 @@
     \]
   \end{definition}
 
-  {\color{red} insert venn's graphs here!} 
+%   \def \setA{ (0,0) circle (1cm) }
+%   \def \setB{ (1.5,0) circle (1cm) }
+%   \def \myrectangle{ (-2, -1.5) rectangle (3.5, 1.5) }
+%   \begin{center}
+%     \begin{tikzpicture}
+%       \draw \myrectangle node[below left]{$\Omega$};
+%       \begin{scope}
+%         \clip \setA ;
+%         \fill[gray] \setB ;
+%       \end{scope}
+%       % start of clip scope
+%       % end of clip scope
+%       \draw \setA node[left] {$A$};
+%       \draw \setB node[right] {$B$};
+%     \end{tikzpicture}
+
+%     \begin{tikzpicture}
+% \draw (-2,-1.5) rectangle (3,1.5) node[below left]{$U$}; \fill[gray] (0,0) circle (1cm);
+% \fill[gray] (1,0) circle (1cm);
+% \draw (0,0) circle (1cm);
+% \draw (1,0) circle (1cm); \draw (-1,1) node {$A$}; \draw (3,1) node {$B$};
+% \end{tikzpicture}
+%   \end{center}
+
+ {\color{red} insert venn's graphs here!} 
 
   \begin{example}
     $A = \{1, 2, 3\}$ and $B = \{3, 4\}$, then $A\cup B = \{1, 2, 3, 4\}$ and
@@ -167,10 +193,10 @@
           \bigcap_{i=1}^n A_i & =A_1\cap A_2\cap\cdots\cap A_n\\
       & = \{x\mid x\in
         A_1~\text{and}~x\in A_2~\text{and}~\cdots~\text{and}~x\in A_n\}\\
-                          & = \{x\mid x\in A_i~\text{for all}~i\in \{1, \cdots,n\}\}
+                          & = \{x\mid x\in A_i~\text{for all}~i\in \{1, \cdots,n\}\},
     \end{align*}
     \begin{align*}
-      \bigcap_{i=1}^\infty A_i & = \bigcap_{i\in \mathbb{N}} A_i = \{x\mid x\in A_i~\text{for all}~i \in \N\}
+      \bigcap_{i=1}^\infty A_i & = \bigcap_{i\in \mathbb{N}} A_i = \{x\mid x\in A_i~\text{for all}~i \in \N\}.
     \end{align*}
   \end{definition}
 
@@ -192,12 +218,12 @@
     Sets $A$ and $B$ are called \textbf{disjoint} (mutually exclusive) if $A\cap
     B = \varnothing$.
 
-    $A_1, A_2,\cdots$ are called \textbf{disjoint} (mutually exclusive) if
+    Sets $A_1, A_2,\cdots$ are called \textbf{disjoint} (mutually exclusive) if
     $A_i\cap A_j = \varnothing$ for each pair $i, j$ with $i\neq j$.
   \end{definition}
 
   \begin{example}
-    Let $A=\{1,2,3\}, B=\{7, 22,45\}$. Then $A\cap B = =\varnothing$, and thus $A$
+    Let $A=\{1,2,3\}, B=\{7, 22,45\}$. Then $A\cap B =\varnothing$, and thus $A$
     and $B$ are disjoint.
 
     $A_1 =\{1\}, A_2=\{2\}, A_3 = \{3\},\cdots$, then $A_1, A_2,\cdots$ are disjoint.
@@ -205,7 +231,7 @@
 
   
   \begin{definition}
-    [Universe, Complement and Difference]
+    [Universe, Complement and Difference]\lecture{January 23, 2017}
     Let $\Omega$ be a \textbf{universe} set, i.e., a set that contains all the
     objects of interest in a particular context. Let $A$ and $B$ be subsets of $\Omega$.
     \begin{itemize}
@@ -302,15 +328,15 @@
   \item If $A_1, A_2, \cdots$ is a sequence of (pairwise) disjoint events, then
     \begin{equation}
       \label{eq:additivity}
-      \bP\left( \bigcup_i A_i \right) = \sum_i \bP(A_i).
+      \bP\left( \bigcup_i A_i \right) = \sum_i \bP(A_i).\quad(\text{Countable additivity})
     \end{equation}
   \end{enumerate}
 
   \begin{corollary}
-    If $A_1, A_a, \cdots, A_n$ are disjoint events, then
+    If $A_1, A_2, \cdots, A_n$ are disjoint events, then
     \begin{equation}
       \label{eq:add-finite}
-      \bP(A_1\cup \cdots A_n) = \bP(A_1) + \cdots + \bP(A_n).
+      \bP(A_1\cup \cdots \cup A_n) = \bP(A_1) + \cdots + \bP(A_n).
     \end{equation}
   \end{corollary}
 
@@ -341,7 +367,8 @@
   \end{proof}
 
   \begin{example}
-    Roll two fair six sided dice. One possible outcome is $(3,5)$.
+    Roll two fair six sided dice, distinguish between them in some way: a first
+    one and second one. One possible outcome is $(3,5)$.
     \begin{enumerate}
       [(1)]
     \item How many possible outcomes are there?
@@ -351,7 +378,7 @@
   \end{example}
 
   \textbf{Answer.} (1). There are $6$ possible outcomes for the first die. For
-  each of these, there are $6$ possible outcomes fro the second die. Then the
+  each of these, there are $6$ possible outcomes for the second die. Then the
   total is $6\cdot 6 = 36$, i.e.,
   \[
     \Omega = \{(i,j)\mid i,j = 1,2,3,4,5,6\}.
@@ -373,7 +400,7 @@
     compute the probabilities by \textbf{counting}.
   \end{remark}
 
-  \textbf{Counting Principle.} Consider an $r$-stage process. Suppose
+  \textbf{Counting Principle.} Consider a $r$-stage process. Suppose
   \begin{itemize}
   \item There are $n_1$ possible outcomes for the $1$st stage;
   \item For each possible outcome of the $1$st stage, there are $n_2$ possible
@@ -472,9 +499,98 @@
     \binom{n}{k}.
   \]
 
+  How to find this number? We will start from the ordered selection.
+  
   Given a set of $n$ distinct items. Making an ordered selection of $k$ items is
   the same as choosing a combination of $k$ items and then ordering them.
 
+  This is a $2$ stage process.
+
+  The number of ordered selection of $k$ items is equal to the number of
+  combinations of $k$ items from $n$ distinct items times the number of ways to
+  order the $k$ items:
+  \[
+    n(n-1)\cdots(n-k+1) = \binom{n}{k}\cdot k!.
+  \]
+  Therefore, the number of combinations of $k$ items from a set of $n$ distinct
+  items is
+  \[
+    \binom{n}{k} = \frac{n(n-1)\cdots (n-k+1)}{k!} = \frac{n!}{k!(n-k)!}.
+  \]
+  
+  \begin{example}
+    Select $5$ of $60$ students in class without regard to order.
+  \end{example}
+  \textbf{Answer.} $\ds\binom{60}{5}$, or
+  \[
+    \frac{60\cdot 59\cdot 58 \cdot 57 \cdot 56}{5\cdot 4 \cdot 3\cdot 2\cdot 1}
+    = 5,461,512 = \frac{60!}{5!55!}.
+  \]
+  \textbf{Facts.}
+  \begin{itemize}
+  \item $\ds\binom{n}{k} = \binom{n}{n-k}$.
+  \item $\ds\binom{n}{k}$ is also called a binomial coefficient because it is equal
+    to the coefficient of $x^ky^{n-k}$ in the expansion
+    \[
+      (x+y)^n = \sum_{k=0}^n \binom{n}{k}x^k y^{n-k}.
+    \]
+  \end{itemize}
+
+  \textbf{Partitions.} A combination is a choice of a $k$-element subset of an
+  $n$-element set, and the order does not matter.
+
+  This is the same as partitioning the set into two parts. One part contains the
+  $k$ elements, and the other part contains the remaining $n-k$ elements.
+
+  Now consider partitions into more than two parts.
+
+  Given a set of $n$ distinct items and non-negative integers $n_1, n_2,\cdots,
+  n_r$ with $n=n_1+n_2+\cdots n_r$. How many ways can the set be partitioned
+  into $r$ disjoint subsets with $n_i$ items in the $i$th subset? We call this
+  number $\ds \binom{n}{n_1,n_2,\cdots,n_r}$.
+
+  This is a $r$ stage process:
+  \begin{itemize}
+  \item Stage $1$: to form the first subset, choose a combination of $n_1$ items
+    out of the $n$-item set.
+  \item Stage $2$: to form the second subset, choose a combination of $n_2$
+    items out the remaining $n-n_1$ items.
+  \item and so on...
+  \end{itemize}
+
+  The total number of partition is
+  \begin{align*}
+    &\binom{n}{n_1}\binom{n-n_1}{n_2}\binom{n-n_1-n_2}{n_3}\cdots\binom{n-n_1-\cdots
+    - n_{r-1}}{n_r} \\
+    =&\ \frac{n!}{n_1!(n-n_1)!}\cdot \frac{(n-n_1)!}{n_2!(n-n_1-n_2)!}\cdot \frac{(n-n_1-n_2)!}{n_3!(n-n_1-n_2-n_3)!}\cdots \frac{(n-n_1-\cdots -n_{r-1})!}{n_r!(n-n_1-\cdots - n_{r-1}-n_r)!}\\
+    =&\ \frac{n!}{n_1!\cdot n_2!\cdots n_r!}.
+  \end{align*}
+
+  Therefore,
+  \[
+    \binom{n}{n_1,n_2,\cdots, n_r} = \frac{n!}{n_1!\cdot n_2!\cdots n_r!}.
+  \]
+
+  \begin{example}
+    How many arrangements are there of the letters ``BANANA''? 
+  \end{example}
+
+  This is an example of arrangement with identical objects.
+
+  \textbf{Solution 1.} There are $6$ positions for the letters. Each arrangement
+  is a partition of the set of $6$ positions into a subset of size $3$ (the
+  positions that get the letter ``A''), a subset of size $2$ (the positions that
+  get the letter ``N'') and a subset of size $1$ (the position that gets letter
+  ``B''). For example,
+  \[
+    \underset{1}{\text{A}}\underset{2}{\text{A}}\underset{3}{\text{A}}\underset{4}{\text{B}}
+    \underset{5}{\text{N}} \underset{6}{\text{N}}.
+  \]
+  
+  So the total number of arrangements is
+  \[
+    \binom{6}{3,2,1} = \frac{6!}{3!2!1!} = 60.
+  \]
 
   
   \subsection{Infinitely many outcomes}
