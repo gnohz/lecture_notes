@@ -1,7 +1,7 @@
 \input{notes_preambles.tex}
 
 \begin{document}
-	\let\ref\Cref
+	% \let\ref\Cref
 	\title{\bf{MTH 201: Introduction to Probability}}
 	\date{Spring 2017, University of Rochester}
 	\author{Jie Zhong}
@@ -25,22 +25,458 @@
 \section{Introduction and Sets} \lecture{January 18, 2017}
   \subsection{Course structure}
   \label{subsec:course}
+  \begin{itemize}
+  \item Instructor information.
+  \item Textbook: on Blackboard.
+  \item Grade: $10\%$ Webwork, $10\%$ Written Homework, $20\%$ First Midterm,
+    $20\%$ Second Midterm, $40\%$ Final.
+  \item Webwork: due every Friday at $11:59$ pm. Set $00$ due Friday, Jan 27;
+    Set $1$ due Friday, Feb 3.
+  \item Written Homework: $2$ or $3$ problems, due in class on Wednesdays. The
+    first one is due Wednesdays, Feb 1. Write down your name and student ID, and
+    staple it if it has more than one page.
+  \item No late submissions! No makeup for exam!
+  \item Old exams.
+  \item Office hours: $4:30-5:30$ pm on MWF at Hylan $1008$.
+  \end{itemize}
+  \subsection{Objective and expectation}
+  \label{subsec:objective}
+  \textbf{Objective}
 
+  Learn how to describe uncertainty in term of mathematical models and develop
+  the skill of probabilistic reasoning.
+
+  \textbf{What to expect}
+
+  Math takes deliberate practice. You will need to do a lot of practice problems
+  to do well in this course.
+  
+  When studying for exams, start by doing the practice exams and redoing the
+  written homework and Webwork. But don't stop there. Redo the problems again
+  until the process of solving them becomes automatic. This is how you'll know
+  that you’ve mastered the material. To use your time efficiently, focus your
+  practice on the things you haven't mastered.
+  
+  You are expected to read the textbook and review your class notes while doing homework and studying for exams.
+
+  This is not a calculus class; we will not just be computing things according
+  to simple algorithms. This class is on a higher level. Logical reasoning will
+  be very important. I will show you the fundamental concepts and techniques.
+  But you will often be asked to combine these in new ways in the homework and
+  on exams.
+
+  In class, I will describe the definitions and give simple instructive examples and proofs. We want to nail the basics, because that's the foundation on which you'll build.
+
+  Probability theory is built on set theory, so that's where we'll begin....
 
   \subsection{Sets}
   \label{subsec:sets}
+  \begin{definition}[Sets]
+    A \textbf{set} is a collection of objects, usually numbers. The objects in
+    the set are called \textbf{elements} of the set.
+  \end{definition}
 
+  \begin{example}
+    $A = \{1, 2,3\}$.
 
+    $1\in A$ ($1$ is an element of $A$).
+
+    $4 \notin A$ ($4$ is not an element of $A$).
+  \end{example}
+
+  \begin{definition}
+    We write
+
+    $\N = \text{set of positive integers} = \{1, 2, 3,\cdots\}$;
+
+    $\mathbb{Z} = \text{set of integers} = \{0, 1, -1, 2, -2,\cdots\}$;
+
+    $\R = \text{set of real numbers}$;
+
+    $\varnothing = \text{empty set = set of no elements} = \{\}$.
+  \end{definition}
+
+  There is another way to describe a set:
+  \[
+    \{x \mid x~ \text{satisfies}~ P\} = \text{set of all elements havign property}
+    P.
+  \]
+
+  \begin{example}
+    \[
+      [0,1] = \{x \in\R\mid 0 \le x \le 1\};
+    \]
+    \[
+      A = \{n\in \N\mid n~ \text{is a square}\} = \{n^2\mid n\in \N\} = \{1 ,4,
+      9, 16, 25, \cdots\}.
+    \]
+  \end{example}
+
+  \begin{definition}[Subsets]
+    $A$ is subset of $B$ if every element of $A$ is an element of $B$, and we
+    write $A \subseteq B$.
+  \end{definition}
+
+  \begin{remark}
+    $A = B$ if and only if $A\subseteq B$ and $B\subseteq A$, if and only if $A$
+    and $B$ have the same elements.
+  \end{remark}
+
+  {\color{red} insert a venn's graph here!} 
+
+  \begin{example}
+    $A = \{1, 2, 3\}$, $B= \{1, 2, 3, 4, 5, 6\}$, and $C = \{7\}$. Then we have
+    \[
+      A \subseteq B, A\nsubseteq C, B\nsubseteq A.
+    \]
+  \end{example}
+
+  \begin{definition}
+    [Union and Intersection]
+    \[
+      A \cup B = \text{union of } A~\text{and}~B = \text{set of elements that
+        belong to } A~\text{or}~B = \{x\mid x\in A~\text{{\color{red} or}}~x\in B\};
+    \]
+    \[
+      A \cap B = \text{intersection of } A~\text{and}~B = \text{set of elements that
+        belong to both } A~\text{and}~B = \{x\mid x\in A~\text{{\color{red} and} }~x\in B\}.
+    \]
+  \end{definition}
+
+  {\color{red} insert venn's graphs here!} 
+
+  \begin{example}
+    $A = \{1, 2, 3\}$ and $B = \{3, 4\}$, then $A\cup B = \{1, 2, 3, 4\}$ and
+    $A\cap B = \{3\}$.
+  \end{example}
+  
+  \begin{definition}
+    [Union and Intersection of Many Sets]
+    Let $A_1, A_2, \cdots$ be sets.
+    \begin{align*}
+      \bigcup_{i=1}^n A_i & = A_1\cup A_2\cup\cdots\cup A_n\\
+      & = \{x\mid x\in
+        A_1~\text{or}~x\in A_2~\text{or}~\cdots~\text{or}~x\in A_n\}\\
+                          & = \{x\mid x\in A_i~\text{for some}~i\in \{1, \cdots,n\}\},
+    \end{align*}
+    \begin{align*}
+      \bigcup_{i=1}^\infty A_i & = \bigcup_{i\in \mathbb{N}} A_i = \{x\mid x\in A_i~\text{for some}~i \in \N\},
+    \end{align*}
+    where ``some'' means ``as least one''.
+    \begin{align*}
+          \bigcap_{i=1}^n A_i & =A_1\cap A_2\cap\cdots\cap A_n\\
+      & = \{x\mid x\in
+        A_1~\text{and}~x\in A_2~\text{and}~\cdots~\text{and}~x\in A_n\}\\
+                          & = \{x\mid x\in A_i~\text{for all}~i\in \{1, \cdots,n\}\}
+    \end{align*}
+    \begin{align*}
+      \bigcap_{i=1}^\infty A_i & = \bigcap_{i\in \mathbb{N}} A_i = \{x\mid x\in A_i~\text{for all}~i \in \N\}
+    \end{align*}
+  \end{definition}
+
+  \begin{example}
+    Let $A_1 = \{1\}, A_2 = \{1,2\}, A_3 = \{1,2,3\},\cdots$. Then
+    \[
+      \bigcup_{i=1}^n A_i = \{1,\cdots, n\}, \quad \bigcup_{i=1}^\infty A_i =
+      \{1, 2, 3,\cdots\} = \N,
+    \]
+    and
+    \[
+      \bigcap_{i=1}^\infty A_i = \{1\},\quad \bigcap_{i=5}^{10} = A_5\cap A_6
+      \cap\cdots\cap A_{10} = \{1, 2, 3, 4,5\}.
+    \]
+  \end{example}
+
+  \begin{definition}
+    [Disjoint Sets]
+    Sets $A$ and $B$ are called \textbf{disjoint} (mutually exclusive) if $A\cap
+    B = \varnothing$.
+
+    $A_1, A_2,\cdots$ are called \textbf{disjoint} (mutually exclusive) if
+    $A_i\cap A_j = \varnothing$ for each pair $i, j$ with $i\neq j$.
+  \end{definition}
+
+  \begin{example}
+    Let $A=\{1,2,3\}, B=\{7, 22,45\}$. Then $A\cap B = =\varnothing$, and thus $A$
+    and $B$ are disjoint.
+
+    $A_1 =\{1\}, A_2=\{2\}, A_3 = \{3\},\cdots$, then $A_1, A_2,\cdots$ are disjoint.
+  \end{example}
+
+  
+  \begin{definition}
+    [Universe, Complement and Difference]
+    Let $\Omega$ be a \textbf{universe} set, i.e., a set that contains all the
+    objects of interest in a particular context. Let $A$ and $B$ be subsets of $\Omega$.
+    \begin{itemize}
+    \item \textbf{Complement}: $A^c = \{x\in \Omega\mid x\notin A\}$.
+    
+    {\color{red} insert a venns' graph here!}
+    \item \textbf{Difference}: $A\setminus B =  A - B = \{x\in\Omega\mid x\in A
+    ~\text{\color{red} and}~x\notin B \} = A\cap B^c$.
+    
+    {\color{red} venn's graph here!} 
+    \end{itemize}
+  \end{definition}
+
+  \begin{example}
+    Let $\Omega = \R$, $A = [0,1] = \{x\in \R: 0\le x\le 1\}$, and $B =
+    \mathbb{Z}$. Then
+    \[
+      A^c = (-\infty, 0)\cup (1,\infty),\quad A\setminus B = (0,1).
+    \]
+  \end{example}
+
+  \textbf{Pop Quiz}: 
+  \begin{itemize}
+  \item $\Omega^c = \varnothing$, $\varnothing^c = \Omega$.
+  \item What is $\bigcup_{n\in \mathbb{Z}} (n,n+1)$?
+
+  Answer: $\{x\in \R\mid x\notin \Z\} = \R \setminus \Z$.
+  \end{itemize}
+
+  \textbf{Algebra of Sets}:
+  \begin{itemize}
+  \item $(A^c)^c = A$;
+  \item $A\cap A^c = \varnothing$;
+  \item $A\cup \Omega = \Omega$;
+  \item $A\cap \Omega = A$.
+  \end{itemize}
+
+  \textbf{De Morgan's Laws}:
+  \begin{itemize}
+  \item $(A\cup B)^c = A^c \cap B^c$;
+  \item $\left( \bigcup_i A_i \right)^c = \bigcap_i A_i^c$;
+  \item $(A\cap B)^c = A^c \cup B^c$;
+  \item $\left( \bigcap_i A_i  \right)^c = \bigcup_i A_i^c$.
+  \end{itemize}
+  \begin{proof}
+    \begin{align*}
+      x\in (A\cup B)^c & \Leftrightarrow x\notin A\cup B \Leftrightarrow x\notin A~\text{and}~x\notin B\\
+                       & \Leftrightarrow x\in A^c \cap B^c \quad (\text{``$\Leftrightarrow$'' means ``if and only if'' means ``is equivalent to''}).
+    \end{align*}
+
+    Rest of proof: Exercise.
+  \end{proof}
+
+  \textbf{Distributive Properties}:
+  \begin{itemize}
+  \item $A\cap (B\cup C) = (A\cap B) \cup (A\cap C)$;
+  \item $A\cup (B\cap C) = (A\cup B)\cap (A\cup C)$.
+  \end{itemize}
+  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Random outcomes and random variables }
 \label{sec:rand-outc-rand}
   \subsection{Sample spaces and probabilities}
   \label{subsec:1.1}
+  \begin{definition}
+    A probability model is a mathematical description of an uncertain situation.
+    It has two parts:
+    \begin{enumerate}
+    \item The \textbf{sample space} $\Omega$, i.e., the set of all possible
+      outcomes of an experiment.
+      \begin{itemize}
+      \item Elements of $\Omega$ are \textbf{outcomes} (also called
+        \textbf{sample points}), denoted by $\omega$.
+      \item Subsets of $\Omega$ are called \textbf{events}.
+      \item The set of all events is denoted by $\cF$.
+      \end{itemize}
+    \item The \textbf{probability measure} $\bP$.
+      \begin{itemize}
+      \item $\bP$ is a function from $\cF$ to $\R$;
+      \item To each event $A$, it assigns a number $\bP(A)$, called
+        the \textbf{probability} of $A$.
+      \item The probability measure $\bP$ is sometimes called a probability law or
+        probability distribution.
+      \end{itemize}
+    \end{enumerate}
+    The triple $(\Omega, \cF, \bP)$ is called a \textbf{probability space}.
+  \end{definition}
+  \vspace{1em}
+  \textbf{Axioms of Probability}:
+  \begin{enumerate}
+  \item $0\le \bP(A)\le 1$ for each event $A$;
+  \item $\bP(\Omega) = 1$ and $\bP(\varnothing) =0$;
+  \item If $A_1, A_2, \cdots$ is a sequence of (pairwise) disjoint events, then
+    \begin{equation}
+      \label{eq:additivity}
+      \bP\left( \bigcup_i A_i \right) = \sum_i \bP(A_i).
+    \end{equation}
+  \end{enumerate}
+
+  \begin{corollary}
+    If $A_1, A_a, \cdots, A_n$ are disjoint events, then
+    \begin{equation}
+      \label{eq:add-finite}
+      \bP(A_1\cup \cdots A_n) = \bP(A_1) + \cdots + \bP(A_n).
+    \end{equation}
+  \end{corollary}
+
+  \begin{proof}
+    It is a direct consequence of~\eqref{eq:additivity} by setting $A_{n+1} =
+    A_{n+2} =\cdots = \varnothing$.
+  \end{proof}
+
 
   \subsection{Equally likely outcomes}
   \label{subsec:1.2}
+  \textbf{Fact.} Suppose the sample space has finitely many equally likely
+  outcomes, then for any event $A$,
+  \[
+    \bP(A) = \frac{\# A}{\# \Omega} = \frac{\text{number of elements in
+        $A$}}{\text{number of elements in $\Omega$}}.
+  \]
+  \begin{proof}
+    Say $\Omega$ has $n$ equally likely outcomes, then $\bP(\omega) = 1/n$ for
+    every $\omega \in \Omega$.
 
+    For any event $A = \{a_1, \cdots, a_k\}$,
+    \[
+      \bP(A) = \bP\left( \bigcup_{i=1}^k \{a_i\}\right) =
+      \sum_{i=1}^k\bP(\{a_i\}) = \frac{k}{n},
+    \]
+    where the last equality is obtain by \eqref{eq:add-finite}.
+  \end{proof}
+
+  \begin{example}
+    Roll two fair six sided dice. One possible outcome is $(3,5)$.
+    \begin{enumerate}
+      [(1)]
+    \item How many possible outcomes are there?
+    \item How many ways to roll doubles?
+    \item What is the probability of rolling doubles?
+    \end{enumerate}
+  \end{example}
+
+  \textbf{Answer.} (1). There are $6$ possible outcomes for the first die. For
+  each of these, there are $6$ possible outcomes fro the second die. Then the
+  total is $6\cdot 6 = 36$, i.e.,
+  \[
+    \Omega = \{(i,j)\mid i,j = 1,2,3,4,5,6\}.
+  \]
+
+  (2). For each outcome of the first die, there is exactly one possible outcome
+  for the second die, because they have to match. So there are $6\cdot 1 = 6$
+  ways to roll doubles.
+  
+
+  (3). The probability of rolling doubles is
+  \[
+    \bP = \frac{\# ~\text{outcomes with doubles}}{\#~\text{all possible
+        outcomes}} = \frac{6}{36} = \frac{1}{6}.
+  \]
+
+  \begin{remark}
+    When the sample space has finitely many equally likely outcomes, we can
+    compute the probabilities by \textbf{counting}.
+  \end{remark}
+
+  \textbf{Counting Principle.} Consider an $r$-stage process. Suppose
+  \begin{itemize}
+  \item There are $n_1$ possible outcomes for the $1$st stage;
+  \item For each possible outcome of the $1$st stage, there are $n_2$ possible
+    outcomes for the $2$nd stage;
+  \item For each possible outcome of the first two stages, there are $n_3$
+    possible outcomes for the $3$rd stage, $\cdots$, and so on.
+  \end{itemize}
+  Then the total number of possible outcomes is
+  \[
+    n_1\cdot n_2\cdot n_3\cdots n_r.
+  \]
+
+  \begin{example}
+    A telephone number is a $7$-digit sequence of numbers in $\{0,1,2,\cdots,
+    9\}$, but the first digit cannot be zero or one. How many distinct telephone
+    numbers are there?
+  \end{example}
+
+  \textbf{Answer.} This is a $7$ stage process. There are $8$ choices for the
+  first stage (or first digit), and $10$ choices for each stage after. So the
+  total number is
+  \[
+    8\cdot 10\cdot 10\cdot 10\cdot 10\cdot 10\cdot 10 = 8\cdot 10^6.
+  \]
+
+  \begin{example}
+    A screen has $N$ pixels. Each pixel can be off (black) or on (white). How
+    many possible images can the screen display?
+  \end{example}
+
+  \textbf{Answer.} This is an $N$ stage process. There are $2$ choices for each
+  stages: pixel on or off. The total number is $2^N$.
+
+  \textbf{Permutations.} How many ways are there to permute (means ``arrange'',
+  or ``order'') $n$ distinct items?
+
+  \textbf{Answer.} $n$ stage process. 
+  \begin{itemize}
+  \item $1$st stage: choose which item goes in position $1$. There are $n$ items
+    to choose from.
+  \item $2$nd stage: choose which item goes in position $2$. There are $n-1$
+    items to choose from.
+  \item $\cdots$
+  \item $n$th stage: choose which item goes in position $n$. There
+    is only one item to choose.
+  \end{itemize}
+  Thus, the total number of ways to permute $n$ distinct items is
+  \[
+    n(n-1)\cdots 1 = {\color{red} n!}.
+  \]
+
+  \begin{example}
+    How many ways can we line up all $60$ students in this class?
+  \end{example}
+  \textbf{Answer.} $60\cdot 59\cdots 1 = 60! \approx 8\cdot 10^{81}$ (greater
+  than the number of atoms in the observable universe).
+
+  \textbf{Ordered Selection.} ($k$-permutations) It is a selection of items from
+  a set such that the order we select them matters.
+
+  How many ordered selection of $k$ items from a set of $n$ distinct items are
+  possible?
+
+  $k$ stage process:
+  \begin{itemize}
+  \item $1$st stage: choose which item goes in position one: $n$ choices.
+  \item $2$nd stage: choose which item goes in position two: $n-1$ choices.
+  \item $\cdots$
+  \item $k$th stage: choose which item goes in position $k$: ${\color{red}
+      n-k+1} $ choices.
+  \end{itemize}
+
+  So the total number is
+  \[
+    n\cdot n-1\cdots (n-k+1).
+  \]
+
+  \begin{remark}
+   Permutation is a special ordered selection. 
+  \end{remark}
+
+  \begin{example}
+    How many ways we can line up $5$ of the $60$ students in the class?
+  \end{example}
+
+  \textbf{Answer.} $60\cdot 59\cdot 58\cdot 57\cdot 56 = 655,381,440$.
+
+  \textbf{Combinations.} (unordered selection) It is a selection of items from a
+  set such that the order of the selection does not matter.
+
+  How many combinations of $k$ items from a set of $n$ distinct items are
+  possible?
+
+  We call this number ``$n$~choose~$k$'', denoted by
+  \[
+    \binom{n}{k}.
+  \]
+
+  Given a set of $n$ distinct items. Making an ordered selection of $k$ items is
+  the same as choosing a combination of $k$ items and then ordering them.
+
+
+  
   \subsection{Infinitely many outcomes}
   \label{subsec:1.3}
 

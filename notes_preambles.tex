@@ -1,6 +1,7 @@
 \documentclass[]{article}
 \usepackage{etex}
 \usepackage[margin = 1.5in]{geometry}
+\setlength{\parskip}{1em}
 \setlength{\parindent}{0in}
 \usepackage{amsmath}
 \usepackage{amsfonts}
@@ -16,7 +17,8 @@
 \usepackage{ae,aecompl}
 \usepackage[pdftex, pdfproducer={LaTeX}, pdfcreator={pdflatex}]{hyperref}
 
-\usepackage{cleveref}
+\usepackage{enumerate}
+% \usepackage{cleveref}
 
 % \newtheorem*{theorem}{Theorem}
 % \theoremstyle{definition}
@@ -29,18 +31,18 @@
 % \newtheorem*{proposition}[theorem]{Proposition}
 % \newtheorem*{corollary}[theorem]{Corollary}
 % \newtheorem*{remark}[theorem]{Remark}
-\newtheorem{theorem}{Theorem}
-\newtheorem{corollary}{Corollary}
-\newtheorem{proposition}{Proposition}
-\newtheorem{remark}{Remark}
+\newtheorem{theorem}{Theorem}[subsection]
+\newtheorem{corollary}{Corollary}[subsection]
+\newtheorem{proposition}{Proposition}[subsection]
+\newtheorem{remark}{Remark}[subsection]
 
 \theoremstyle{definition}
-\newtheorem{problem}{Problem}
-\newtheorem{definition}{Definition}
-\newtheorem{example}{Example}
+\newtheorem{problem}{Problem}[subsection]
+\newtheorem{definition}{Definition}[subsection]
+\newtheorem{example}{Example}[subsection]
 
-\numberwithin{equation}{section}
-\numberwithin{theorem}{section}
+\numberwithin{equation}{subsection}
+\numberwithin{theorem}{subsection}
 
 
 \setlength{\marginparwidth}{1.5in}
@@ -82,6 +84,7 @@
 \newcommand{\V}{\mathbb{V}}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\bP}{\mathbb{P}} % \P is used by the system
+\newcommand{\Z}{\mathbb{Z}}
 
 \newcommand{\wt}{\widetilde}
 \newcommand{\ds}{\displaystyle}
