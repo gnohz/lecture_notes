@@ -355,7 +355,7 @@
         $A$}}{\text{number of elements in $\Omega$}}.
   \]
   \begin{proof}
-    Say $\Omega$ has $n$ equally likely outcomes, then $\bP(\omega) = 1/n$ for
+    Say $\Omega$ has $n$ equally likely outcomes, then $\bP(\{\omega\}) = 1/n$ for
     every $\omega \in \Omega$.
 
     For any event $A = \{a_1, \cdots, a_k\}$,
@@ -363,7 +363,7 @@
       \bP(A) = \bP\left( \bigcup_{i=1}^k \{a_i\}\right) =
       \sum_{i=1}^k\bP(\{a_i\}) = \frac{k}{n},
     \]
-    where the last equality is obtain by \eqref{eq:add-finite}.
+    where the last equality is obtained by \eqref{eq:add-finite}.
   \end{proof}
 
   \begin{example}
@@ -400,7 +400,7 @@
     compute the probabilities by \textbf{counting}.
   \end{remark}
 
-  \textbf{Counting Principle.} Consider a $r$-stage process. Suppose
+  \textbf{Counting Principle.} \lecture{January 25, 2017} Consider a $r$-stage process. Suppose
   \begin{itemize}
   \item There are $n_1$ possible outcomes for the $1$st stage;
   \item For each possible outcome of the $1$st stage, there are $n_2$ possible
@@ -475,7 +475,8 @@
 
   So the total number is
   \[
-    n\cdot n-1\cdots (n-k+1).
+    n\cdot n-1\cdots (n-k+1) = (n)_k \quad(\text{Pochhammer symbol or the
+      descending factorial}).
   \]
 
   \begin{remark}
@@ -592,13 +593,272 @@
     \binom{6}{3,2,1} = \frac{6!}{3!2!1!} = 60.
   \]
 
+  \textbf{Solution 2.} We first pretend the $6$ letters are distinct: 
+  \[
+    \text{B, A$_1$, N$_1$, A$_2$, N$_2$, A$_3$}.
+  \]
+  Then there are $6!$ ways to arrange them. But each of the $3!$ ways to arrange
+  the ``A''s and each of the $2!$ ways to arrange the ``N''s correspond to the
+  same arrangement. For example, 
+  \[
+    \text{BA$_1$N$_1$A$_2$N$_2$A$_3$ and BA$_3$N$_2$A$_1$N$_1$A$_2$}
+  \]
+  both spell ``BANANA''. So we need to divide it by $3!2!$ and thus, there are
+  $\ds \frac{6!}{3!2!}$ ways to arrange the letters.
+
+  \textbf{Sampling.} It is a fundamental mechanism for producing equally likely
+  outcomes. Sampling simply means drawing uniformly random elements from a given
+  set:
+  \begin{itemize}
+  \item sampling with replacement
+  \item sampling without replacement
+  \item ordered sample
+  \item unordered sample
+  \end{itemize}
+  \textbf{Exercise:} read examples in textbook.
+  \begin{example}
+    An urn contains $6$ red balls, $5$ blue balls. We assume the balls can be distinguished. Sample $3$ balls without replacement.
+    What is the probability that one of the $3$ balls is red and the other two
+    are blue.
+  \end{example}
+
+  \textbf{Solution with order.} In this case, the sample space consists of all
+  possible ordered selections of $3$ balls, i.e., $11\cdot 10\cdot 9 = 990$
+  outcomes. Each outcome is equally likely.
+
+  There are $6\cdot 5\cdot 4 = 120$ outcomes, where the first ball is red and
+  the other two are blue; $5\cdot 6\cdot 4 = 120$ possible outcomes, where the
+  first is blue, second is red and the third is blue; $5\cdot 4\cdot 6=120$
+  possible outcomes, where the first two are blue and the last is red.
+
+  Thus, the event that one ball is red and two balls are blue consists of
+  $3\cdot 120 = 360$ outcomes. Then the desired probability is $\ds
+  \frac{360}{990}= \frac{4}{11}$.
+
+  \textbf{Solution without order.} In this case, the sample space consists of
+  all possible combinations of $3$ balls. There are $\ds\binom{11}{3}$ possible
+  outcomes. The number of favorable outcomes is $\ds\binom{6}{1}\binom{5}{2}$,
+  which is the number of ways to pick a combination of one red ball and two blue
+  balls ($2$ stage process).
+
+  Therefore, the desired probability is
+  \[
+    \frac{\frac{6!}{5!1!}\cdot \frac{5!}{2!3!}}{\frac{11!}{8!3!}} = \frac{4}{11}.
+  \]
+  
   
   \subsection{Infinitely many outcomes}
   \label{subsec:1.3}
+  \begin{example}
+    Flip a fair coin until the first head appears. The number of flips required
+    is the outcome of the experiment. The sample space is
+    \[
+      \Omega = \{1, 2,\cdots\} = \N.
+    \]
+    What is the probability $\bP(\{k\})$ for $k\in \N$?
+  \end{example}
+  The outcome is $k$ if and only if the first $k-1$ flips are tails and the
+  $k$th flip is heads:
+  \[
+    \underbrace{TT\cdots T}_{k-1}\underbrace{H}_{k\text{th}}
+  \]
+  There are $2^k$ possibilities for the first $k$ flips. All are equally likely
+  (fair coin). Exactly one possibility that gives us what we want, so
+  \[
+    \bP(\{k\}) = \frac{1}{2^k}.
+  \]
+  This is the \textbf{geometric distribution} with success parameter $1/2$ on
+  the positive integers.
+  \begin{remark}
+    We know that $\bP(\Omega) = 1$, so we can derive a series formula:
+    \[
+      \sum_{k=1}^\infty \frac{1}{2^k} = 1.
+    \]
+  \end{remark}
+  \begin{example}
+    \label{eg:uniform}
+    Choose a real number uniformly at random from the interval $[0,1]$.
+    ``Uniformly'' means that the chosen number is equally likely to lie
+    anywhere in the interval. The sample space is
+    \[
+      \Omega=[0,1].
+    \]
+    Assume $[a,b]\subseteq [0,1]$, the probability that the chosen number lies
+    in the interval $[a,b]$ should equal to the proportion $[0,1]$ covered by
+    $[a,b]$:
+    \[
+      \bP([a,b])=b-a.
+    \]
+  \end{example}
+    We call the probability model in Example \ref{eg:uniform} the
+    \textbf{uniform distribution} on $[0,1]$.
 
-  \subsection{Consequences of the rules of probability}
+    \textbf{Fact.} In Example \ref{eg:uniform}, we have
+    \[
+      \bP(\{c\}) = 0,\quad c\in [0,1].
+    \]
+    \begin{proof}
+      We will show that $\bP(\{c\})<\e$ for any positive number $\e$.
+
+      Given any $\e>0$. Choose an interval $[a,b]\subseteq [0,1]$ such that
+      $c\in [a,b]$ and $b-a<\e$. Then
+      \begin{align*}
+        \bP(\{c\})
+        & \le \bP(\{c\}) + \bP([a,b]\setminus \{c\}) \\
+        & = \bP(\{c\} \cup ([a,b]\setminus \{c\}))\\
+        & = \bP([a,b]) = b-a<\e.
+      \end{align*}
+      Therefore, $\bP(\{c\}) = 0$.
+    \end{proof}
+ 
+ \begin{example}
+   What if we change the sample space to $[-1,1]$ in the previous example? Then
+   the probability that the chosen number lies in the interval $[a,b]\subseteq
+   [-1,1]$ is $(b-a)/2$.
+ \end{example}
+ \begin{example}
+   Choose a point uniformly from a region $R$ in $\R^2$. If $A$ is a region
+   contained in $R$, then the probability that the chosen point is in $A$ equals
+   the proportion of $R$ covered by $A$ is:
+   \[
+     \bP(A) = \frac{\text{area of}~A}{\text{area of}~R}.
+   \]
+ \end{example}
+
+ \textbf{Countable Sample Spaces.}
+ \begin{definition}
+   A set is called \textbf{countable} if it has finite elements or it can be
+   written as a infinite list, i.e.,
+   \[
+     \{a_1,a_2,\cdots, a_n\}\quad\text{or}\quad\{a_1,a_2,\cdots\}.
+   \]
+ \end{definition}
+ For example, $\N, \Z, \Z^2 = \{(a,b)\mid a, b\in \Z\}$, and $\mathbb{Q}=$ set
+ of all rational numbers.
+
+ \textbf{Fact.} If the sample space is countable, the probability measure $\bP$
+ is completely determined by its values on single outcomes: $\bP(\{\omega\})$.
+ That is, if $A=\{a_1,a_2,\cdots, a_n\}$ or $A=\{a_1,a_2,\cdots\}$ is an event,
+ then $\bP(A) = \sum_i \bP(\{a_i\})$.
+
+ \begin{definition}
+   A set is called \textbf{uncountable}, if it is not countable. 
+ \end{definition}
+ For example, $\R$, $[0,1]$, etc.
+
+ \textbf{Fact.} If the sample space is uncountable, the probability measure
+ $\bP$ is not determined by its values on single outcomes because
+ $\bP(\cup_{a\in A} \{a\})$ is not equal to $\sum_{a\in A} \bP(\{a\})$.
+
+ 
+  \subsection{Consequences of probability axioms}
   \label{subsec:1.4}
+  Recall: Probability Axioms
+  \begin{enumerate}
+  \item $0\le \bP(A)\le 1$ for each event $A$;
+  \item $\bP(\Omega) = 1$ and $\bP(\varnothing) =0$;
+  \item If $A_1, A_2, \cdots$ is a sequence of (pairwise) disjoint events, then $  \bP\left( \bigcup_i A_i \right) = \sum_i \bP(A_i)$.
+  \end{enumerate}
+  \textbf{Consequences.}
+  \begin{enumerate}[(1)]
+  \item $\bP(A^c) = 1- \bP(A)$. (complement)
+  \item If $A\subseteq B$, then $\bP(A) \le \bP(B)$. (monotonicity)
+  \item $\bP(A\cup B) \le \bP(A) + \bP(B)$. (sub-additivity)
+  \item $\bP(A\cup B) = \bP(A) + \bP(B) - \bP(A\cup B)$. (inclusion-exclusion)
+  \end{enumerate}
+  \begin{proof}
+    (1). $1 = \bP(\Omega) = \bP(A\cup A^c) = \bP(A) + \bP(A^c)$.
 
+    (2). Since $\bP(B) = \bP(A\cup (B\setminus A)) = \bP(A) + \bP(B\setminus
+    A)$, $\bP(B) \ge \bP(A)$.
+
+    (3). It is a direct result of (4). But here we provide an alternative proof.
+    Using (2),
+    \[
+      \bP(A\cup B) = \bP(A\cup (B\setminus A)) = \bP(A) + \bP(B\setminus A) \le
+      \bP(A) + \bP(B),
+    \]
+    since $B\setminus A\subseteq B$. 
+
+    (4). This time we prove it by looking at Venn's diagrams. Think of
+    probability as area. Then $A \cap B$ gets counted twice, so we have to take
+    it out once.
+  \end{proof}
+  \begin{example}
+    A town with population $100,000$ has newspapers $A$ and $B$. $10\%$ of the
+    proportion read paper $A$, $30\%$ of the
+    proportion read paper $B$ and $8\%$ of the
+    proportion read both two papers. 
+  \end{example}
+  \begin{enumerate}[(a)]
+  \item How many people read $A$ or $B$?
+    \[
+      \bP(A\cup B) = \bP(A) + \bP(B) - \bP(A\cap B) = 10\% + 30\% - 8\% = 32\%.
+    \]
+    So there are $100 K\cdot 32\% = 32,000$ people who read paper $A$ or $B$.
+  \item How many people do not read $A$ nor $B$?
+    \[
+      \bP(A^c\cap B^c) = \bP((A\cup B)^c) = 1 - \bP(A\cup B) = 1-32\% = 68\%.
+    \]
+    So there are $68,000$ people.
+  \item How many people read only one paper?
+    \[
+      \bP((A\cup B)\set\ (A\cap B)) = \bP(A\cup B) - \bP(A\cap B) = 32\% -8\% = 24\%.
+    \]
+    So there are $24,000$ people.
+  \end{enumerate}
+  \textbf{Generalizations.}
+  \begin{itemize}
+  \item [(3')] If $A_1,A_2,\cdots$ is a countable sequence of events,
+    $\bP(\cup_i A_i) \le \sum_i \bP(A_i)$ (countable sub-additivity).
+  \item general inclusion-exclusion formula:
+    \begin{align*}
+      \bP(A\cup B\cup C)
+      & = \bP(A) + \bP(B) + \bP(C) - \bP(A\cap B) - \bP(A\cap C) -\bP(B\cap C) + \bP(A\cap B\cap C)
+    \end{align*}
+    \begin{align*}
+      \bP(A\cup B\cup C\cup D)
+      & = \bP(A) + \bP(B) + \bP(C) + \bP(D)\\
+      & \quad - \bP(A\cap B) - \bP(A\cap C) - \bP(A\cap D) - \bP(B\cap C) -\bP(B\cap D) - \bP(C\cap D)\\
+      & \quad + \bP(A\cap B\cap C) + \bP(A\cap B\cap D) + \bP(A\cap C\cap D) + \bP(B\cap C\cap D)\\
+      & \quad - \bP(A\cap B\cap C\cap D).
+    \end{align*}
+    See Page 19 of Textbook for general $n$.
+  \end{itemize}
+  \begin{example}
+    [Birthday problem]
+    What is the probability that in the class of $60$ students, two or more have
+    the same birthday?
+  \end{example}
+  \textbf{Answer.} It is easier to first calculate the probability of the
+  complement event, which is the probability that none shares a birthday.
+
+  The sample space is all the possible lists of birthdays for the $60$ students.
+  There are $(365)^{60}$ possible lists. The desired event is all possible lists
+  of birthdays where no two students share a birthday. Making such a list is a
+  $60$ stage process.
+  \begin{itemize}
+  \item Stage 1: $365$ choices for student $1$'s birthday.
+  \item Stage 2: $364$ choices for student $2$'s birthday.
+  \item Stage 3: $363$ choices for student $3$'s birthday.
+  \item Continue...
+  \end{itemize}
+  In fact, this is a sampling without replacement. There are $365\cdot 364\cdots
+  306$ possible lists where none shares the same birthday. Thus,
+  \[
+    \bP(\{\text{none shares the same birthday}\}) = \frac{365\cdot 364\cdots
+      306}{365\cdot 365\cdots 365} = 0.05877\cdots.
+  \]
+  Therefore,
+  \[
+    \bP(\{\text{two or more share birthday}\}) = 1- 0.005877\cdots = 0.994122\cdots.
+  \]
+
+
+
+
+
+  
   \subsection{Random variables: a first look}
   \label{subsec:1.5}
 
