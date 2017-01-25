@@ -410,7 +410,7 @@
   \end{itemize}
   Then the total number of possible outcomes is
   \[
-    n_1\cdot n_2\cdot n_3\cdots n_r.
+    n_1\cdot n_2\cdot n_3\cdots n_r.\quad(\text{multiplication principle})
   \]
 
   \begin{example}
@@ -453,7 +453,7 @@
   \]
 
   \begin{example}
-    How many ways can we line up all $60$ students in this class?
+    How many ways can we line up all $60$ students in a class?
   \end{example}
   \textbf{Answer.} $60\cdot 59\cdots 1 = 60! \approx 8\cdot 10^{81}$ (greater
   than the number of atoms in the observable universe).
@@ -461,7 +461,7 @@
   \textbf{Ordered Selection.} ($k$-permutations) It is a selection of items from
   a set such that the order we select them matters.
 
-  How many ordered selection of $k$ items from a set of $n$ distinct items are
+  How many ordered selections of $k$ items from a set of $n$ distinct items are
   possible?
 
   $k$ stage process:
@@ -606,7 +606,7 @@
   both spell ``BANANA''. So we need to divide it by $3!2!$ and thus, there are
   $\ds \frac{6!}{3!2!}$ ways to arrange the letters.
 
-  \textbf{Sampling.} It is a fundamental mechanism for producing equally likely
+  \textbf{Sampling.}\lecture{January 30, 2017} It is a fundamental mechanism for producing equally likely
   outcomes. Sampling simply means drawing uniformly random elements from a given
   set:
   \begin{itemize}
@@ -728,7 +728,7 @@
  \textbf{Countable Sample Spaces.}
  \begin{definition}
    A set is called \textbf{countable} if it has finite elements or it can be
-   written as a infinite list, i.e.,
+   written as an infinite list, i.e.,
    \[
      \{a_1,a_2,\cdots, a_n\}\quad\text{or}\quad\{a_1,a_2,\cdots\}.
    \]
@@ -861,8 +861,50 @@
   
   \subsection{Random variables: a first look}
   \label{subsec:1.5}
+  \begin{definition}
+    Given a probability model $(\Omega, \bP, \cF)$, a \textbf{random variable} (rv) is a
+   function $X$ mapping from $\Omega$ to a set of real numbers, i.e.,
+   \[
+     X: \Omega \to \R.
+   \]
+   To each outcome $\omega\in \Omega$, $X$ assigns a real number $X(\omega)$,
+   which is called an experimental value or a realization of $X$.
+ \end{definition}
+ 
+  \begin{remark}
+   A random variable is a function, not a variable! By convention, we use
+   capitals, like $X, Y$  and $Z$ etc for random variables. 
+  \end{remark}
+  \textbf{Notations.}
+  \begin{itemize}
+  \item $\{X = c\} = \{\omega\in \Omega\mid X(\omega) = c\}$.
+  \item $\{a\le X\le b\} = \{\omega\in \Omega\mid a\le X(\omega)\le b\}$.
+  \item $\{X\in B\} = \{\omega\in \Omega\mid X(\omega)\in B\}$, where $B$ could
+    be any subset of $\R$.
+  \item $\{X = a, Y = b\} = \{X=a~\text{and}~Y=b\} = \{X=a\}\cap \{Y = b\}$.
+  \end{itemize}
 
+  \begin{remark}
+    In general, the definition of a random variable requires that all sets of
+    the forms like $\{X = c\}, \{a\le X\le b\}$, etc. be events. Thus, we need a
+    more careful definition of $\cF$, the set of all events. See Section 1.7 for details.
+  \end{remark}
+  \begin{example}
+    Roll two fair six sided dice. Define:
+    \begin{itemize}
+    \item $X_1 =$ outcome for the first die.
+    \item $X_2 =$ outcome for the second die.
+    \item $X = $ sum of outcomes of the two dice.
+    \item $Y =$ outcome of the second die raised to $5$th power.
+    \end{itemize}
+  \end{example}
+  If we write the sample space as
+  \[
+    \Omega = \{(i,j) \mid i,j\in\{1,2,3,4,5,6\}\},
+  \]
+  then $X_1((i,j)) = i, X_2((i,j)) = j, X((i,j)) = i+j$ and $Y((i,j)) = j^5$.
 
+  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Conditional probability and independence}
