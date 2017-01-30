@@ -710,8 +710,15 @@
       \end{align*}
       Therefore, $\bP(\{c\}) = 0$.
     \end{proof}
+    From this fact, we know that the probability that the chosen number is a
+    rational number in $[0,1]$ is $0$, and the probability that the chosen
+    number is irrational in $[0,1]$ is $1$. In fact, without of loss of
+    generality, we can assume $\mathbb{Q}\cap [0,1]= \{q_k\}_{k=1}^\infty$. Then
+    \[
+      \bP(\{\mathbb{Q}\cap [0,1]\}) = \sum_{k=1}^\infty\bP(\{q_k\})=0.
+    \]
  
- \begin{example}
+    \begin{example}\lecture{February 1, 2017}
    What if we change the sample space to $[-1,1]$ in the previous example? Then
    the probability that the chosen number lies in the interval $[a,b]\subseteq
    [-1,1]$ is $(b-a)/2$.
@@ -803,7 +810,7 @@
     So there are $68,000$ people.
   \item How many people read only one paper?
     \[
-      \bP((A\cup B)\set\ (A\cap B)) = \bP(A\cup B) - \bP(A\cap B) = 32\% -8\% = 24\%.
+      \bP((A\cup B)\setminus (A\cap B)) = \bP(A\cup B) - \bP(A\cap B) = 32\% -8\% = 24\%.
     \]
     So there are $24,000$ people.
   \end{enumerate}
@@ -847,7 +854,7 @@
   306$ possible lists where none shares the same birthday. Thus,
   \[
     \bP(\{\text{none shares the same birthday}\}) = \frac{365\cdot 364\cdots
-      306}{365\cdot 365\cdots 365} = 0.05877\cdots.
+      306}{365\cdot 365\cdots 365} = 0.005877\cdots.
   \]
   Therefore,
   \[
@@ -890,6 +897,7 @@
     more careful definition of $\cF$, the set of all events. See Section 1.7 for details.
   \end{remark}
   \begin{example}
+    \label{eg:two-dice}
     Roll two fair six sided dice. Define:
     \begin{itemize}
     \item $X_1 =$ outcome for the first die.
@@ -903,7 +911,54 @@
     \Omega = \{(i,j) \mid i,j\in\{1,2,3,4,5,6\}\},
   \]
   then $X_1((i,j)) = i, X_2((i,j)) = j, X((i,j)) = i+j$ and $Y((i,j)) = j^5$.
+  \begin{align*}
+    \bP(X_1 = 3) &  = \bP(\{X_1=3\}) = \bP(\{(i,j)\in\Omega \mid X_1((i,j)) =3\})=\frac{1}{6}.\\
+    \bP(X_1=3, X_2  = 5) & = \bP(\{X_1 =3\}\cap\{X_2=5\}) \\
+    & = \bP(\{(i,j)\in\Omega\mid X_1((i,j))=3 ~\text{and}~ X_2((i,j))=5  \}) =\frac{1}{36}.\\
+    \bP(X_1=3~\text{or}~X_2 = 5) & = \bP(\{X_1=3\}\cup\{X_2=5\})\\
+                 & = \bP(X_1=3) + \bP(X_2 = 5) - \bP(X_1=3,X_2=5) = \frac{1}{6}+\frac{1}{6}-\frac{1}{36} = \frac{11}{36}.\\
+    \bP(X = 3) &= \bP(\{X_1=1,X_2=2\}\cup\{X_1=2,X_2=1\})\\
+                 & =\bP(X_1=1,X_2 = 2) + \bP(X_1=2,X_2=1)= \frac{1}{36}+\frac{1}{36} = \frac{1}{18}.
+  \end{align*}
+  \begin{example}
+    \label{eg:uniform2}
+    Recall in Example \ref{eg:uniform}, select a point uniformly at random from
+    interval $[0,1]$. Let $Y$ be equal to twice the chosen point. The sample
+    space is $\Omega = [0,1]$, and the random variable is $Y(\omega) = 2\omega$
+    for $\omega\in \Omega$. Then for $a\in [0,2]$,
+    \begin{align*}
+      \bP(Y\le a)  & = \bP(\{\omega \in \Omega\mid Y(\omega)\le a\}) = \bP(\{\omega\in\Omega\mid 2\omega\le a\})\\
+                   & = \bP(\{\omega\in [0,1]\mid \omega\le a/2\})\\
+                   & = \bP(\{\omega\in[0,1]\}\cap \{\omega\le a/2\})\\
+      & = \bP([0,a/2]) = a/2.
+    \end{align*}
+    What if $a<0$? Then the event $\{Y\le a\}$ is empty, and so $\bP(\{Y\le a\})
+    = 0$.
 
+    Similarly, if $a>2$, the event $\{Y\le a\}$ is the same as the sample space,
+    and thus $\bP(Y\le a) = 1$.
+  \end{example}
+  \begin{definition}
+    The \textbf{probability distribution} of a random variable $X$ is the
+    collection of all probabilities $\bP(X\in B)$, for all subsets $B\in \R$.
+  \end{definition}
+  The \textbf{range} of a random variable is the set of its possible values. In
+  Example \ref{eg:two-dice}, the range of $X_1$ (outcome of the first die) is
+  the set $\{1,2,3,4,5,6\}$. But in Example \ref{eg:uniform2}, the range of $Y$
+  is the interval $[0,2]$.
+  \begin{definition}
+   If the range of the random variable $X$ is finite or infinitely countable, we
+   call $X$ a \textbf{discrete} random variable. Otherwise, we call $X$ a
+   continuous random variable.
+  \end{definition}
+  \begin{definition}
+    Let $X$ be a discrete random variable. The \textbf{probability mass
+      function} (p.m.f.) of $X$ is the function $p$ (or $p_X$) defined by
+    \[
+      p(k) = \bP(X = k),
+    \]
+    where $k$ is an element of the range of $X$.
+  \end{definition}
   
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
