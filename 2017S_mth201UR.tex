@@ -862,10 +862,6 @@
   \]
 
 
-
-
-
-  
   \subsection{Random variables: a first look}\lecture{February 6, 2017}
   \label{subsec:1.5}
   \begin{definition}
@@ -940,7 +936,7 @@
   \end{example}
   \begin{definition}
     The \textbf{probability distribution} of a random variable $X$ is the
-    collection of all probabilities $\bP(X\in B)$, for all subsets $B\in \R$.
+    collection of all probabilities $\bP(X\in B)$, for all subsets $B\subseteq \R$.
   \end{definition}
   The \textbf{range} of a random variable is the set of its possible values. In
   Example \ref{eg:two-dice}, the range of $X_1$ (outcome of the first die) is
@@ -955,15 +951,392 @@
     Let $X$ be a discrete random variable. The \textbf{probability mass
       function} (p.m.f.) of $X$ is the function $p$ (or $p_X$) defined by
     \[
-      p(k) = \bP(X = k),
+      p_X(k) = \bP(X = k),
     \]
     where $k$ is an element of the range of $X$.
   \end{definition}
-  
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+   \textbf{Fact.} The probability distribution of a discrete random variable is
+  completely determined by its p.m.f.
+  \begin{proof}
+    For every $B\subseteq \R$, the set $B\cap\text{range}(X)$ is countable, say
+    \[
+      B\cap\text{range}(X) = \{k_1,k_2,\cdots,k_n\}~\text{or}~\{k_1,k_2,\cdots\}.
+    \]
+    Then
+    \begin{align*}
+      \bP(X\in B) & =
+                    \bP(X\in B\cap\text{range}(X))\\
+                  & = \bP(X\in \cup_i \{k_i\}) = \bP(\cup_i \{X = k_i\})\\
+                  & = \sum_i \bP(X = k_i)\\
+      & = \sum_ip_X(k_i).
+    \end{align*}
+  \end{proof}
+ 
+  \begin{example}
+    Roll two fair dice. Let
+    \begin{itemize}
+    \item $X_1 =$ outcome for the first die.
+    \item $X_2 =$ outcome for the second die.
+    \item $X = $ sum of outcomes of the two dice.
+    \end{itemize}
+    \[
+      \begin{array}{c|cccccc}
+       k & 1  & 2 & 3 & 4 & 5 &  6\\
+        \hline
+       p_{X_1}(k) = \bP(X_1 = k) & 1/6 & 1/6 & 1/6 & 1/6 & 1/6 & 1/6 \\
+      \end{array}
+    \]
+    \[
+      \begin{array}
+        {c|cccccccccccc}
+        k & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12\\
+        \hline
+        p_X(k) = \bP(X = k) & 1/36 & 2/36 & 3/36 & 4/36 & 5/36 & 6/36 & 5/36 &
+                                                                               4/36
+                                          & 3/36 & 2/36 & 1/36 
+      \end{array}
+    \]
+    \begin{align*}
+      \bP(2\le X < 5) & = \bP(X = 2~\text{or}~ X=3~\text{or}~ X=4)\\
+                      & = \bP(X = 2) + \bP(X = 3) + \bP(X = 4)\\
+                      & = p_X(2) + p_X(3) + p_X(4)\\
+                      & = 1/36 + 2/36 + 3/36 = 1/6.
+    \end{align*}
+  \end{example}
+  \textbf{Fact.} $\sum_{k\in \text{range}(X)}p_X(k) = 1$.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Conditional probability and independence}
+  \section{Conditional probability and independence}\lecture{February 8, 2017}
 \label{sec:cond-prob-indep}
+\subsection{Conditional probability}
+\label{subsec:cond-prob}
+\begin{definition}
+  Given an experiment with the probability model $(\Omega,\bP, \cF)$, suppose we
+  know the outcome belongs to a given event $B$ such that $\bP(B)>0$. The probability that the
+  outcome also belongs to event $A$ is called the conditional probability of $A$
+  given $B$, and is defined as
+  \[
+    \bP(A| B) = \frac{\bP(A\cap B)}{\bP(B)},.
+  \]
+\end{definition}
+\begin{example}
+  A fair $6$-sided die is rolled twice. You were told that the sum of the two
+  rolls is $9$ (This is event $B$, information is given). How likely is it that
+  the first roll is $6$ (event A)?
+\end{example}
+\textbf{Answer.} The sample space has $36$ outcomes, i.e.,
+\[
+  \Omega = \{(1,1), (1,2), \cdots, (6,6)\}.
+\]
+$B = \{(3,6), (4,5), (5,4), (6,3)\}$, containing $4$ possible outcomes;
+
+$A = \{(6,1), (6,2),\cdots, (6,6)\}$, but there is only one outcome in event $B$
+belonging to $A$, i.e.,
+\[
+  A\cap B = \{(6,3)\}.
+\]
+Since all outcomes are equally likely, we expect that
+\[
+  \bP(A | B) = \frac{1}{4}.
+\]
+We also note that
+\[\ds
+  \frac{\bP(A\cap B)}{\bP(B)} = \frac{\frac{1}{36}}{\frac{4}{36}} = \frac{1}{4}.
+\]
+
+Intuitively, out of the total probability assigned to elements of $B$,
+$\bP(A| B)$ is the fraction assigned to elements that also belong to $A$.
+
+{\color{red} insert venn's diagrams here!}
+
+\begin{example}
+  Toss a fair coin $5$ times. What is the probability that there are more heads
+  than tails given that the first toss is heads?
+\end{example}
+\textbf{Answer.} The sample space is
+\[
+  \Omega = \{HHHHH, HHHHT, \cdots, TTTTT\} = \text{all length-$5$ sequences of
+    $H$s and $T$s}.
+\]
+$\# \Omega = 2^5 = 32$. 
+$A = \{\text{more $H$s than $T$s}\}$, $B = \{\text{first toss is $H$}\}$.
+\[
+  \bP(A| B) = \frac{\bP(A\cap B)}{\bP(B)} = \frac{\frac{\# (A\cap B)}{\#
+      \Omega}}{\frac{\# B}{\# \Omega}} = \frac{\# (A\cap B)}{\# B}, 
+\]
+since $\Omega$ has finitely many equally likely outcomes.
+
+$\# B = 2^4$.
+
+$\# (A\cap B) = \binom{4}{2} + \binom{4}{3} + \binom{4}{4}$.
+
+Therefore, the conditional probability is
+\[
+  \bP(A| B) = \frac{\binom{4}{2} + \binom{4}{3} + \binom{4}{4}}{2^4} = \frac{11}{16}.
+\]
+\textbf{Fact.} If the sample space has finitely many equally likely outcomes,
+then
+\[
+  \bP(A| B) = \frac{\# (A\cap B)}{\# B},
+\]
+when $B\neq \varnothing$.
+
+\textbf{Fact.} Conditional probability is a probability measure. Specifically,
+given a probability model $(\Omega, \bP, \cF)$, an event $B$ with $\bP(B)>0$,
+then the set function $\bP(\cdot| B)$ satisfies the probability axioms and
+consequences, i.e.,
+\begin{enumerate}[(1)]
+\item $0\le \bP(A| B) \le 1$, for all events $A$;
+\item $\bP(\Omega| B) = 1$ and $\bP(\varnothing| B) = 0$;
+\item If $A_1,A_2,\cdots$ is any countable sequence of disjoint events, then
+  \[
+    \bP(\cup_iA_i | B) = \sum_i\bP(A_i| B).
+  \]
+ \end{enumerate}
+  \begin{proof}
+    Exercise.
+  \end{proof}
+  \begin{remark}
+    We can even regard $\bP(\cdot| B)$ as a probability measure on the sample
+    space $B$.
+  \end{remark}
+
+  \textbf{Multiplication rule (chain rule)}. It follows from the definition of
+  conditional probability that
+  \[
+    \bP(A_1\cap A_2) = \bP(A_1) \bP(A_2| A_1).
+  \]
+  More general version of this rule:
+  \[
+    \bP(\cap_{i=1}^n A_i) = \bP(A_1)\bP(A_2| A_1) \bP(A_2| A_1\cap A_2)
+    \cdots \bP(A_n| \cap_{i=1}^{n-1} A_i).
+  \]
+\begin{proof}
+  The right hand side is
+  \[
+    \frac{\bP(A_1)\bP(A_1\cap A_2)}{\bP(A_1)}\cdot \frac{\bP(A_1\cap A_2\cap
+      A_3)}{\bP(A_1\cap A_2)}\cdots \frac{\bP(A_1\cap\cdots\cap
+      A_n)}{\bP(A_1\cap\cdots\cap A_{n-1})} = \bP(\cap_{i=1}^n A_i).
+  \]
+\end{proof}
+\begin{example}
+  Draw $3$ cards from a standard deck of $52$ cards. What is the probability
+  that you draw ``A22'' in that order?
+\end{example}
+\textbf{Answer.} We solve it by multiplication rule. Define
+\begin{itemize}
+\item $A_1 = \{\text{first card is ``A''}\}$.
+\item $A_2 = \{\text{first card is ``2''}\}$.
+\item $A_3 = \{\text{first card is ``2''}\}$.
+\end{itemize}
+Then
+\[
+  \bP(A_1\cap A_2\cap A_3) = \bP(A_1)\bP(A_2|A_1)\bP(A_3| A_1\cap
+  A_2)=\frac{4}{52}\cdot \frac{4}{51}\cdot \frac{3}{50}.
+\]
+\begin{remark}
+  We can also solve this problem by counting: $\#\Omega = 52\cdot 51\cdot
+  50\cdot 50$ and $\# A = 4\cdot 4\cdot 3$. 
+\end{remark}
+
+\begin{example}
+  [Radar detection]
+  An aircraft is present in a certain area with probability $0.05$. If an
+  aircraft is present, the radar correctly detects it with probability $0.99$.
+  If an aircraft is not present, the radar incorrectly registers it with
+  probability $0.10$.
+  \begin{enumerate}[(1)]
+  \item What is the probability of a false alarm? (``false alarm'' means no
+    aircraft but radar sees one)
+  \item What is the probability of a missed detection? (``missed detection''
+    means there is an aircraft but radar does not register it)
+  \end{enumerate}
+\end{example}
+\textbf{Answer.} Let
+\[
+  A = \{\text{aircraft is present}\},\quad B = \{\text{radar registers an aircraft}\},
+\]
+then
+\[
+  \bP(A) = 0.05,\quad \bP(B|A) = 0.99, \quad \bP(B|A^c) = 0.10.
+\]
+Thus,
+\begin{align*}
+  \bP(\text{false alarm}) & = \bP(A^c\cap B) = \bP(A^c|B) \bP(B) = ???\\
+  & = \bP(B|A^c)\bP(A^c) = 0.10\cdot 0.95 = 0.095.
+\end{align*}
+
+Since $\bP(B|A) = 0.99$, we have $\bP(B^c|A) = 0.01$. Then
+\[
+  \bP(\text{missed detection}) = \bP(A\cap B^c) = \bP(B^c|A) \bP(A) = 0.01\cdot
+  0.05 = 0.0005.
+\]
+\begin{example}
+  $12$ undergrads and $4$ grad students are divided randomly into $4$
+  (distinguishable) groups
+  (with all possible division equally likely). What is the probability that each
+  group has a grad student.
+\end{example}
+
+\textbf{Solution 1.} Call grad students $1,2,3,4$. Define
+\[
+  A_i = \{\text{group $i$ has exactly one grad student}\},\quad i = 1,2,3,4.
+\]
+Then
+\begin{align*}
+  \bP(\cap_{i=1}^4 A_i) & = \bP(A_1)\bP(A_2|A_1)\bP(A_3|A_1\cap A_2)\bP(A_4|A_1\cap A_2\cap A_3)\\
+                        & = \frac{\binom{4}{1}\binom{12}{3}}{\binom{16}{4}}\cdot \frac{\binom{3}{1}\binom{9}{3}}{\binom{12}{4}}\cdot \frac{\binom{2}{1}\binom{6}{3}}{\binom{8}{4}}\cdot \frac{\binom{1}{1}\binom{3}{3}}{\binom{4}{4}} = 0.140659\cdots. 
+\end{align*}
+
+\textbf{Solution 2.} Consider each arrangement as a partition of $16$ students
+into $4$ groups of size $4$. So
+\[
+  \# \Omega = \frac{16!}{4!4!4!4!}.
+\]
+Define $A = \{\text{partitions with one grad student in each group}\}$. Then
+\[
+  \# A = \frac{12!}{3!3!3!3!}\cdot 4!.
+\]
+Therefore,
+\[
+  \bP(A) = \frac{\# A}{\# \Omega} = \frac{12!4!4^4}{16!} = 0.140659\cdots.
+\]
+
+  
+  \textbf{Law of total probability.} Let $B_1, B_2,\cdots$ be a countable
+  sequence of events that forms a \textbf{partition} of $\Omega$. This means
+  $B_1,B_2,\cdots$ are disjoint and make up all of $\Omega$, i.e., $\cup_iB_i = \Omega$.
+
+  Then for any event $A$, we have $A\cap B_1, A\cap B_2,\cdots$ are disjoint,
+  and
+  \[
+    A = \cup_i(A\cap B_i).
+  \]
+  Therefore, we have the following law of total probability,
+  \[
+    \bP(A) = \sum_i \bP(A\cap B_i) = \sum_i \bP(A| B_i) \bP(B_i).
+  \]
+  \textbf{Special case:} $\Omega = B\cup B^c$, then $A = (A\cap B) \cup (A\cap
+  B^c)$. Thus
+  \[
+    \bP(A) = \bP(A\cap B) + \bP(A\cap B^c) = \bP(A|B)\bP(B) + \bP(A|B^c)\bP(B^c).
+  \]
+  \begin{example}
+    There are $3$ urns. Urn $1$ has $3$ red, $4$ green and $5$ blue balls; urn
+    $2$ has $3$ red, $10$ green and $1$ blue balls; urn $3$ has $3$ red, $2$
+    green and $2$ blue balls. Choose one of the urns uniformly at random and
+    then draw a ball blindly from that urn. What is the probability that the
+    ball we choose is green?
+  \end{example}
+  \textbf{Answer.} Partition $\Omega$ into $3$ events. Define
+  \begin{itemize}
+  \item $A = \{\text{the ball we choose is green}\}$;
+  \item $B_1 = \{\text{the ball is from urn $1$}\}$;
+  \item $B_2 = \{\text{the ball is from urn $2$}\}$;
+  \item $B_3 = \{\text{the ball is from urn $3$}\}$.
+  \end{itemize}
+  Then
+  \begin{align*}
+    \bP(A) & = \bP(A\cap B_1) + \bP(A\cap B_2) + \bP(A\cap B_3)\\
+           & = \bP(A|B_1)\bP(B_1) + \bP(A|B_2)\bP(B_2) + \bP(A|B_3)\bP(B_3)\\
+           & = \frac{4}{12}\cdot \frac{1}{3}+\frac{10}{14}\cdot \frac{1}{3}+ \frac{2}{14}\cdot \frac{1}{3}.
+  \end{align*}
+\subsection{Bayes' formula}
+\label{subsec:bayes}
+Bayes' formula allows us to reverse the order of conditioning. It is most
+important tool that goes with conditional probability.
+
+\textbf{Version 1.}
+\[
+  \bP(A|B) = \frac{\bP(B|A)\bP(A)}{\bP(B)}.
+\]
+\begin{proof}
+  $\bP(A|B) \bP(B) = \bP(A\cap B) = \bP(B|A) \bP(A)$.
+\end{proof}
+\textbf{Version 2.}
+\[
+  \bP(A|B) = \frac{\bP(B|A) \bP(A)}{\bP(B|A)\bP(A) + \bP(B|A^c) \bP(A^c)}
+\]
+\begin{proof}
+  It is just an application of law of total probability. 
+\end{proof}
+\textbf{Version 3.} Let $A_1,A_2,\cdots$ be a countable partition of $\Omega$,
+then
+\[
+  \bP(A_k|B) = \frac{\bP(B|A_k)\bP(A_k)}{\bP(B)} = \frac{\bP(B|A_k)\bP(A_k)}{\sum_i\bP(B|A_i)\bP(A_i)}.
+\]
+\begin{example}
+  [Medical test]
+  Suppose $0.1\%$ of the population carries a certain disease. For people with
+  the disease, there is a test that correctly gives a positive result $99.8\%$
+  of the time. For people without the disease, the test correctly gives a
+  negative result $99.7\%$ of the time.
+
+  If your test is positive, what is the probability that you actually have the disease?
+\end{example}
+\textbf{Answer.} Define
+\begin{itemize}
+\item $A = \{\text{have disease}\}$;
+\item $B = \{\text{test positive}\}$.
+\end{itemize}
+Then we want to compute
+\[
+  \bP(A|B) = \bP(\text{have disease}|\text{test positive}).
+\]
+Have
+\begin{itemize}
+\item $\bP(A) = 0.001$, and $\bP(A^c) = 0.999$;
+\item $\bP(B|A) = 0.998$, also known as ``true positive rate'';
+\item $\bP(B^c|A) = 0.002$, ``false negative rate'';
+\item $\bP(B^c|A^c) = 0.997$, ``true negative rate'';
+\item $\bP(B|A^c) = 0.003$, ``false positive rate''.
+\end{itemize}
+By Bayes' formula,
+\begin{align*}
+  \bP(A|B) & = \frac{\bP(B|A)\bP(A)}{\bP(B)} = \frac{\bP(B|A)\bP(A)}{\bP(B|A)\bP(A) + \bP(B|A^c) \bP(A^c)}\\
+           & = \frac{0.998\cdot 0.001}{0.998\cdot 0.001 + 0.003 \cdot 0.999}\\
+  & = 0.2498 = 24.98\%.
+\end{align*}
+\begin{example}
+  A grocery store gets eggs from three different farms. $20\%$ come from farm
+  $1$, $30\%$ come from farm $2$ and $50\%$ come from farm $3$. $5\%$ of the egg
+  cartons from farm $1$ contain a cracked egg, $3\%$ of the egg
+  cartons from farm $2$ contain a cracked egg, $2\%$ of the egg
+  cartons from farm $3$ contain a cracked egg.
+
+  If you open a carton and find a cracked egg, what is the probability that the
+  carton came from farm $3$?
+\end{example}
+\textbf{Answer.} Define $A_i = \{\text{carton is from farm $i$}\}$ and $B =
+\{\text{carton has a cracked egg}\}$.
+
+Need $\bP(A_3|B)$.
+
+Have
+\begin{itemize}
+\item $\bP(A_1) = 0.2$, $\bP(A_2) = 0.3$, $\bP(A_3) = 0.5$;
+\item $\bP(B|A_1) = 0.05$, $\bP(B|A_2) = 0.03$, $\bP(B|A_3) = 0.02$.
+\end{itemize}
+We know that $A_1,A_2$ and $A_3$ partition the sample space, and thus
+\begin{align*}
+  \bP(B) & = \bP(B|A_1)\bP(A_1)+\bP(B|A_2)\bP(A_2) + \bP(B|A_3)\bP(A_3)\\
+         & = 0.05\cdot 0.2 + 0.03\cdot 0.3 + 0.02 \cdot 0.5\\
+  & = 0.024.
+\end{align*}
+Therefore,
+\[
+  \bP(A_3|B) = \frac{\bP(B|A_3)\bP(A_3)}{\bP(B)} = \frac{0.02\cdot 0.5}{0.024} = 0.344\cdots.
+\]
+\subsection{Independence}
+\label{subsec:indep}
+
+\subsection{Independent trials}
+\label{subsec:indep-trials}
+
+\subsection{Further topics on sampling and independence}
+\label{subsec:sampling-indep}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
