@@ -1013,10 +1013,10 @@
 \begin{definition}
   Given an experiment with the probability model $(\Omega,\bP, \cF)$, suppose we
   know the outcome belongs to a given event $B$ such that $\bP(B)>0$. The probability that the
-  outcome also belongs to event $A$ is called the conditional probability of $A$
+  outcome also belongs to event $A$ is called the \textbf{conditional probability} of $A$
   given $B$, and is defined as
   \[
-    \bP(A| B) = \frac{\bP(A\cap B)}{\bP(B)},.
+    \bP(A| B) = \frac{\bP(A\cap B)}{\bP(B)}.
   \]
 \end{definition}
 \begin{example}
@@ -1120,14 +1120,14 @@ consequences, i.e.,
   \]
 \end{proof}
 \begin{example}
-  Draw $3$ cards from a standard deck of $52$ cards. What is the probability
+  Draw $3$ cards from a standard deck of $52$ cards (without replacement). What is the probability
   that you draw ``A22'' in that order?
 \end{example}
 \textbf{Answer.} We solve it by multiplication rule. Define
 \begin{itemize}
 \item $A_1 = \{\text{first card is ``A''}\}$.
-\item $A_2 = \{\text{first card is ``2''}\}$.
-\item $A_3 = \{\text{first card is ``2''}\}$.
+\item $A_2 = \{\text{second card is ``2''}\}$.
+\item $A_3 = \{\text{third card is ``2''}\}$.
 \end{itemize}
 Then
 \[
@@ -1136,7 +1136,7 @@ Then
 \]
 \begin{remark}
   We can also solve this problem by counting: $\#\Omega = 52\cdot 51\cdot
-  50\cdot 50$ and $\# A = 4\cdot 4\cdot 3$. 
+  50$ and $\# A = 4\cdot 4\cdot 3$. 
 \end{remark}
 
 \begin{example}
@@ -1239,11 +1239,11 @@ Therefore,
   \begin{align*}
     \bP(A) & = \bP(A\cap B_1) + \bP(A\cap B_2) + \bP(A\cap B_3)\\
            & = \bP(A|B_1)\bP(B_1) + \bP(A|B_2)\bP(B_2) + \bP(A|B_3)\bP(B_3)\\
-           & = \frac{4}{12}\cdot \frac{1}{3}+\frac{10}{14}\cdot \frac{1}{3}+ \frac{2}{14}\cdot \frac{1}{3}.
+           & = \frac{4}{12}\cdot \frac{1}{3}+\frac{10}{14}\cdot \frac{1}{3}+ \frac{2}{7}\cdot \frac{1}{3}.
   \end{align*}
-\subsection{Bayes' formula}
+  \subsection{Bayes' formula}\lecture{February 13, 2017}
 \label{subsec:bayes}
-Bayes' formula allows us to reverse the order of conditioning. It is most
+Bayes' formula allows us to reverse the order of conditioning. It is the most
 important tool that goes with conditional probability.
 
 \textbf{Version 1.}
@@ -1281,7 +1281,7 @@ then
 \end{itemize}
 Then we want to compute
 \[
-  \bP(A|B) = \bP(\text{have disease}|\text{test positive}).
+  \bP(A|B) = \bP(\text{have disease}~|~\text{test positive}).
 \]
 Have
 \begin{itemize}
@@ -1321,17 +1321,238 @@ We know that $A_1,A_2$ and $A_3$ partition the sample space, and thus
 \begin{align*}
   \bP(B) & = \bP(B|A_1)\bP(A_1)+\bP(B|A_2)\bP(A_2) + \bP(B|A_3)\bP(A_3)\\
          & = 0.05\cdot 0.2 + 0.03\cdot 0.3 + 0.02 \cdot 0.5\\
-  & = 0.024.
+  & = 0.029.
 \end{align*}
 Therefore,
 \[
-  \bP(A_3|B) = \frac{\bP(B|A_3)\bP(A_3)}{\bP(B)} = \frac{0.02\cdot 0.5}{0.024} = 0.344\cdots.
+  \bP(A_3|B) = \frac{\bP(B|A_3)\bP(A_3)}{\bP(B)} = \frac{0.02\cdot 0.5}{0.029} = 0.344\cdots.
 \]
 \subsection{Independence}
 \label{subsec:indep}
+\begin{definition}
+  We say two events $A$ and $B$ are \textbf{independent} if $\bP(A\cap B) = \bP(A)\bP(B)$.
+\end{definition}
+Recall the multiplication rule: $\bP(A\cap B) = \bP(A|B) \bP(B)$. Thus, we can
+have another description of independence: Suppose $\bP(B)>0$. Events $A$ and $B$
+are independent if $\bP(A|B) = \bP(A)$.
+
+\textbf{Intuition.} $A$ and $B$ are independent if the occurrence of $B$ does
+not affect the probability that $A$ occurs.
+
+\textbf{Equivalent statements:}
+\begin{itemize}
+\item $A$ and $B$ are independent;
+\item $\bP(A\cap B) = \bP(A)\bP(B)$;
+\item $\bP(A|B) = \bP(A)$;
+\item $\bP(B|A) = \bP(B)$;
+\item $\bP(A|B) = \bP(A|B^c)$;
+\item $\bP(B|A) = \bP(B|A^c)$.
+\end{itemize}
+\begin{example}
+  Flip two fair coins. $A=\{\text{first is $H$}\}$; $B=\{\text{second is
+    $T$}\}$. By intuition, it seems that $A$ and $B$ are independent.
+\end{example}
+\textbf{Check.} $\bP(A\cap B) = \# (A\cap B)/\# \Omega = 1/4$. But $\bP(A)
+\bP(B) = (1/2)^2 = 1/4$. Thus, $A$ and $B$ indeed are independent.
+\begin{example}
+  Roll a six sided die. The probability $\bP(\{6\})=1/6$. If you know the
+  outcome is even, would it change your answer to the first question?
+\end{example}
+\textbf{Answer.} Yes. Define $A = \{6\}$, and $B=\{\text{even}\}$. Then
+$\bP(\{6\mid \text{even}\}) =\bP(A|B) =  1/3$. So $\bP(A) \neq \bP(A|B)$, and
+thus $A$ and $B$ are not independent.
+
+\textbf{Fact.} The following are equivalent:
+\begin{itemize}
+\item $A$ and $B$ are independent;
+\item $A^c$ and $B$ are independent;
+\item $A$ and $B^c$ are independent;
+  \item $A^c$ and $B^c$ are independent.
+\end{itemize}
+\begin{proof}
+  See Textbook for details.
+\end{proof}
+\begin{definition}
+  [Independence for more than two events]
+  The events $A_1, A_2$ and $A_3$ are \textbf{independent} if \textbf{all} of the
+  following hold:
+  \begin{itemize}
+  \item $\bP(A_1\cap A_2 \cap A_3) = \bP(A_1)\bP(A_2)\bP(A_3)$;
+  \item $\bP(A_1\cap A_2) = \bP(A_1)\bP(A_2)$;
+  \item $\bP(A_1\cap A_3) = \bP(A_1)\bP(A_3)$;
+  \item $\bP(A_2\cap A_3) = \bP(A_2)\bP(A_3)$.
+  \end{itemize}
+  The events $A_1, A_2,\cdots, A_n$ are \textbf{independent} if $\bP(\cap_{i\in S} A_i) =
+  \prod_{i\in S}\bP(A_i)$ for \textbf{any} subset $S\subseteq \{1, 2,\cdots, n\}$.
+\end{definition}
+\begin{remark}
+ \begin{enumerate}[(1)]
+ \item Events $A_1, A_2,\cdots, A_n$ are independent if $\bP(\cap_{i=1}^n
+   A_i^\ast) = \prod_{i=1}^n \bP(A_i^\ast)$, where $A_i^\ast = A_i~ \text{or}~A_i^c$.
+ \item An infinite collection of events is independent if every finite
+   sub-collection is independent.
+ \end{enumerate} 
+\end{remark}
+\begin{definition}
+  [Independence of random variables]
+  The random variables $X_1, X_2,\cdots,X_n$ are \textbf{independent} if
+  \[
+    \bP(X_1\in B_1, X_2\in B_2, \cdots, X_n\in B_n) = \bP(X_1\in B_1)\bP(X_2\in
+    B_2)\cdots \bP(X_n\in B_n),
+  \]
+  for all subsets $B_1, B_2, \cdots, B_n \subseteq \R$.
+\end{definition}
+\textbf{Special cases:}\lecture{February 15, 2017}
+\begin{itemize}
+\item The discrete random variables $X_1, X_2, \cdots, X_n$ are independent if
+  \[
+    \bP(X_1 =c_1, X_2=c_2, \cdots, X_n = c_n) = \prod_{i=1}^n \bP(X_i = c_i),
+  \]
+  for all $c_1, c_2, \cdots, c_n\in \R$.
+\item The continuous random variables $X_1, X_2, \cdots, X_n$ are independent if
+  \[
+    \bP(X_1 \le c_1, X_2\le c_2, \cdots, X_n \le  c_n) = \prod_{i=1}^n \bP(X_i \le c_i),
+  \]
+  for all $c_1, c_2, \cdots, c_n\in \R$.
+\end{itemize}
+\begin{example}
+  Roll two fair six sided dice. Let $X$ be the sum of two outcomes, and $Y$ be
+  the outcome of the first die. Then
+  \begin{itemize}
+  \item $\bP(X = 12, Y = 1) = 0$;
+  \item $\bP(X = 12)\bP(Y = 1) = 1/(36\cdot 6)$;
+  \item $\bP(X = 12, Y = 1) \neq \bP(X = 12)\bP(Y = 1)$.
+  \end{itemize}
+  Therefore, $X$ and $Y$ are dependent. 
+\end{example}
+\begin{example}
+  Roll a fair four sided die. Then the sample space $\Omega = \{1,2,3,4\}$.
+  Define
+  \[
+    X(\omega) =
+    \begin{cases}
+      1,\mbox{if}~\omega~\text{is odd};\\
+      0,\mbox{if}~\omega~\text{is even}.
+    \end{cases}
+    \quad
+    Y(\omega) =
+    \begin{cases}
+      1,\mbox{if}~\omega = 1~\text{or}~2;\\
+      0,\mbox{if}~\omega = 3~\text{or}~4.
+    \end{cases}
+  \]
+  Prove that these two random variables $X$ and $Y$ are independent.
+\end{example}
+\begin{proof}
+  We need to check equations for all $c_i$'s in the ranges.
+  \[
+    \bP(X = a, Y = b) = \frac{1}{4} = \frac{1}{2}\cdot \frac{1}{2}=\bP(X = a)\bP(Y = b),
+  \]
+  for any $a, b \in \{0,1\}$.
+\end{proof}
+
 
 \subsection{Independent trials}
 \label{subsec:indep-trials}
+The simplest way to generate independent events is by \textbf{repeated} trials.
+Repeated independent trials give rise to three important probability
+distributions, Bernoulli, binomial and geometric. We introduce them in this
+section.
+
+A \textbf{Bernoulli trial} is an experiment with two possible outcomes: failure
+or success, or simply $0$ or $1$:
+\begin{itemize}
+\item $p = \bP(\{\text{success}\}) = \bP(\{1\})$;
+\item $q = 1-p = \bP(\{\text{failure}\}) = \bP(\{0\})$.
+\end{itemize}
+\begin{example}
+  Flip a possibly biased coin. Suppose the probability that you get heads is
+  $p$, for some $p\in [0,1]$, not necessarily $1/2$. Define $X$ is the outcome of the experiment. Then the probability
+  distribution of $X$ is determined by its p.m.f., i.e., $\bP(X = 1) = p$ and $\bP(X = 0 ) = 1-p$.
+\end{example}
+\begin{definition}
+  Let $0\le p\le 1$. A random variable $X$ has the \textbf{Bernoulli
+    distribution with success probability $p$} if $X$ is $\{0,1\}$-valued and
+  satisfies $\bP(X =1) = p$ and $\bP(X = 0)=0$. We write $X\sim\text{Ber}(p)$.
+\end{definition}
+So a Bernoulli random variable gives the outcome of a Bernoulli trial.
+
+\textbf{Finitely many independent trials.}
+\begin{example}
+  Flip a biased coin with success probability (heads) $p$. Repeat this
+  experiment six times. Then the sample space $\Omega$ consists of all
+  length-$6$ vectors of $1$ and $0$. Define $X_i$ is the outcome of $i$-th
+  trial. For example, a typical outcome is $\omega = (0,1,0,0,1,0)\in \Omega$ and
+  $X_1(\{\omega\}) = 0$, $X_2(\{\omega\}) = 1$ and $X_6(\{\omega\}) = 0$.
+  Furthermore,
+  \begin{align*}
+    \bP(\{(0,1,0,0,1,0)\}) & = \bP(X_1 =0, X_2 =1, X_3 = 0, X_4 =0, X_5 =1, X_6 =0)\\
+                           & = \bP(X_1 = 0)\bP(X_2 = 1)\bP(X_3 = 0)\bP(X_4 = 0)\bP(X_5 = 1)\bP(X_6 = 0)\\
+    & = p^2(1-p)^4,
+  \end{align*}
+  by independence.
+\end{example}
+\textbf{Number of success in $n$ independent trials with success probability $p$.}
+\begin{example}
+  Flip a biased coin $n$ times. The sample space $\Omega$ is all length-$n$
+  vectors of $0$ or $1$, and $\# \Omega = 2^n$. Define $n$ independent Ber($p$) random variables
+  $\{X_i\}_{i=1}^n$, where $X_i$ is the outcome of $i$-th trial, either $0$ or $1$. Let $X$ be the
+  number of success, i.e.,
+  \[
+    X = X_1 + X_2+\cdots + X_n.
+  \]
+  The event $\{X = k\}$ is all length-$n$ vectors of $1$ and $0$ with exactly
+  $k$ ``$1$''s. There are $\ds \binom{n}{k}$ such vectors (choose $k$ out of $n$
+  positions, and order does not matter since we can not tell a ``$1$'' from
+  another ``$1$'').
+
+  Each such vector has probability
+  \[
+    p^k(1-p)^{n-k}.
+  \]
+  Thus,
+  \[
+    \bP(X = k) = \text{sum of probabilities of such vectors} = \binom{n}{k}p^k(1-p)^k.
+  \]
+\end{example}
+\begin{definition}
+  Let $0\le p\le 1$. A random variable has the \textbf{binomial distribution
+    with parameters $n$ and $p$} if
+  \[
+    \bP(X = k) = \binom{n}{k}p^k(1-p)^k.
+  \]
+  We write $X\sim\text{Bin}(n,p)$.
+\end{definition}
+
+
+
+
+\textbf{Infinitely many independent trials.} Consider a countably infinite
+sequence of independent trials with success probability $p$. We obtain a
+countably infinite sequence of Ber($p$) random variables $X_1, X_2,\cdots$,
+where $X_i$ is the outcome of $i$th trial.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \subsection{Further topics on sampling and independence}
 \label{subsec:sampling-indep}
