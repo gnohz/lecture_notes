@@ -1321,11 +1321,11 @@ We know that $A_1,A_2$ and $A_3$ partition the sample space, and thus
 \begin{align*}
   \bP(B) & = \bP(B|A_1)\bP(A_1)+\bP(B|A_2)\bP(A_2) + \bP(B|A_3)\bP(A_3)\\
          & = 0.05\cdot 0.2 + 0.03\cdot 0.3 + 0.02 \cdot 0.5\\
-  & = 0.029.
+  & = 0.024.
 \end{align*}
 Therefore,
 \[
-  \bP(A_3|B) = \frac{\bP(B|A_3)\bP(A_3)}{\bP(B)} = \frac{0.02\cdot 0.5}{0.029} = 0.344\cdots.
+  \bP(A_3|B) = \frac{\bP(B|A_3)\bP(A_3)}{\bP(B)} = \frac{0.02\cdot 0.5}{0.024} = 0.344\cdots.
 \]
 \subsection{Independence}
 \label{subsec:indep}
@@ -1523,42 +1523,107 @@ So a Bernoulli random variable gives the outcome of a Bernoulli trial.
   \]
   We write $X\sim\text{Bin}(n,p)$.
 \end{definition}
-
-
-
+\begin{example}
+  What is the probability that five rolls of a fair die yield two or three sixes?
+\end{example}
+\textbf{Answer.} Let $S_5$ be the number of sixes that appeared in five rolls.
+Then $S_5\sim\text{Bin}(5,1/6)$, and
+\begin{align*}
+  \bP(S_5\in\{2,3\}) & = \bP(S_5 = 2) + \bP(S_5=3)\\
+                     & = \binom{5}{2}\left(\frac{1}{6}\right)^2\left(\frac{5}{6}\right)^3 + \binom{5}{3}\left(\frac{1}{6}\right)^3\left(\frac{5}{6}\right)^2 \approx 0.193.
+\end{align*}
 
 \textbf{Infinitely many independent trials.} Consider a countably infinite
 sequence of independent trials with success probability $p$. We obtain a
 countably infinite sequence of Ber($p$) random variables $X_1, X_2,\cdots$,
-where $X_i$ is the outcome of $i$th trial.
+where $X_i$ is the outcome of $i$th trial. The sample space $\Omega$ consists of
+all vectors of infinitely many ``$1$''s or ``$0$''s.
+
+Let $X$ be the number of trials needed for the first success. 
+
+For example, $\omega = (0,1,0,0,1,0,1,1,0,1,\cdots)$, then
+\[
+  X_1(\omega) = 0, \quad X_5(\omega) = 1,\quad X(\omega) =2.
+\]
+In general, for a positive integer $k=1,2,\cdots$,
+\begin{align*}
+  \bP(X = k) & = \bP(X_1 =0, X_2=0, \cdots, X_{k-1}=0, X_k=1)\\
+             & = \bP(X_1=0)\bP(X_2 = 0)\cdots \bP(X_{k-1}=0)\bP(X_k=1) = \prod_{i=1}^{k-1}\bP(X_i=0)\bP(X_k=1)\\
+             & = (1-p)\cdot(1-p)\cdots (1-p)\cdot p\\
+  & = (1-p)^{k-1}p.
+\end{align*}
+\begin{definition}
+  Let $0< p\le 1$. A random variable $X$ has the \textbf{geometric
+    distribution with success parameter $p$} if
+  \[
+    \bP(X = k) = (1-p)^{k-1} p,
+  \]
+  for all $k=1,2,\cdots.$.
+  We write $X\sim\text{Geom}(p)$.
+\end{definition}
+\begin{example}
+  What is the probability that it takes more than seven rolls of a fair die to
+  roll a six?
+\end{example}
+\textbf{Answer.} Let $N$ be the number of rolls of a fair die until the first
+six. Then $N\sim\text{Geom}(1/6)$, and
+\[
+  \bP(N>7) = \sum_{k=8}^\infty \bP(N=k) =
+  \sum_{k=8}^\infty\left(\frac{5}{6}\right)^{k-1}\frac{1}{6} =
+  \frac{1}{6}\frac{\left(\frac{5}{6}\right)^7}{1-\frac{5}{6}} = \left(\frac{5}{6}\right)^7.
+\]
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-\subsection{Further topics on sampling and independence}
+\subsection{Further topics on sampling and independence}\lecture{February 20, 2017}
 \label{subsec:sampling-indep}
+\textbf{Hypergeometric distribution.} A basket contains a litter of $6$ kittens,
+$2$ males and $4$ females. A neighbor comes and picks $3$ kittens randomly to
+take home with him (so this is a sampling without replacement, and the trials
+are not independent). Let $X$ be the number of male kittens in the group the
+neighbor chose. Then the probability mass function of $X$ is as follows:
+\begin{align*}
+  \bP(X=0) & =\frac{\binom{2}{0}\binom{4}{3}}{\binom{6}{3}} = \frac{4}{20},\quad
+  \bP(X=1) =\frac{\binom{2}{1}\binom{4}{2}}{\binom{6}{3}} = \frac{12}{20},\\
+  \bP(X=2) & =\frac{\binom{2}{2}\binom{4}{1}}{\binom{6}{3}} = \frac{4}{20},\quad
+  \bP(X=3) =\frac{\binom{2}{3}\binom{4}{0}}{\binom{6}{3}} = 0.
+\end{align*}
+\begin{remark}
+  We say $X$ here has the \textbf{hypergeometric distribution with parameter
+    $(6,2,3)$}, or $X\sim\text{Hypergeo}(6,2,3)$. See Definition 2.38 in
+  Textbook for general case. By convention, we set
+  $\ds\binom{n}{k} =0$ for $k>n\ge 0$.
+\end{remark}
 
+Contrast the experiment above with this one. The neighbor's daughter picks
+up a random kitten from the litter of six, pets it, and puts it back in the basket.
+A moment later she comes around again, picks up a random kitten, pets it, and
+puts it back in the basket with its siblings. She repeats this altogether three
+times. Let $Y$ be the number of times she chose a male kitten to pet. This
+experiment is sampling with replacement, the individual trials are independent,
+so $Y\sim\text{Bin}(3,2/6)$, and the probability mass function is
+\[
+  \bP(Y = k) =\binom{3}{k}\left(\frac{2}{6}\right)^k\left(\frac{4}{6}\right)^{3-k},
+\]
+for $k = 0, 1,2,3$.
 
-
+\textbf{Conditional independence.}
+\begin{example}
+  There are two types of coins in circulation: fair coins that give heads and tails with equal probability, and biased coins that give tails with probability $3/5$. Suppose that $90\%$ of coins in circulation are fair and $10\%$ are biased. I have a random coin and I flip it twice. What are the chances I get tails twice?
+\end{example}
+\textbf{Answer.} Let $F$ denote the event that the coin is fair and $B$ that it is biased. Denote by $A_1$ and $A_2$ the events that the first and second flip yield tails. To answer the question we assume that the successive flips of any given coin are independent. This gives us the \textbf{conditional} independence:
+\[
+  \bP(A_1\cap A_2|F) = \bP(A_1|F)\bP(A_2|F), \quad\bP(A_1\cap A_2|B) =
+  \bP(A_1|B)\bP(A_2)\bP(B).
+\]
+The solution comes by the law of total probability:
+\begin{align*}
+  \bP(A_1\cap A_2) & = \bP(A_1\cap A_2|F) \bP(F)+ \bP(A_1\cap A_2|B)\bP(B)\\
+                   & = \bP(A_1|F)\bP(A_2|F)\bP(F) + \bP(A_1|B)\bP(A_2|B)\bP(B)\\
+                   & = \frac{261}{1000}.
+\end{align*}
+\begin{remark}
+  A key lesson of this example is that $\bP(A_1\cap A_2) \neq\bP(A_1)\bP(A_2)$.
+\end{remark}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
 \section{Random variables}
